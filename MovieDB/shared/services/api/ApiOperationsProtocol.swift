@@ -11,15 +11,19 @@ import SwiftyJSON
 import Promises
 import RealmSwift
 
-protocol ListSearchApi: class {
-    associatedtype Content: VideoContent
-    static func retrieveList(sortedBy category: ContentCategory) -> Promise<[Content]>
-    static func search(queryTxt: String, category: ContentCategory) -> Promise<[Content]>
+//TODO: get a better name
+protocol ApiOperationsProtocol: class {
+    associatedtype Content: Object
+    static func listContent(sortedBy category: ContentCategory) -> Promise<[Content]>
+    static func search(queryTxt: String, category: ContentCategory, localData: [Content]?) -> Promise<[Content]>
+    static func mapping(jsonResponse: JSON) -> [Content]
+    static func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any]
 }
 
-extension ListSearchApi {
-    static func retrieveList(sortedBy category: ContentCategory) -> Promise<[Content]> {
-        
+extension ApiOperationsProtocol {
+    
+    //list content by category
+    static func listContent(sortedBy category: ContentCategory) -> Promise<[Content]> {
         if AppConfiguration.isNetworkReachable {
             let querySegmentType = String(describing: Content.self).lowercased()
             let endpoint = "\(querySegmentType)/\(category.rawValue)"
@@ -39,9 +43,10 @@ extension ListSearchApi {
         }
     }
     
-    static func search(queryTxt: String, category: ContentCategory) -> Promise<[Content]> {
+    // if local data is passed the method searches inside of that array and returns results if not goes to the server to look for them
+    static func search(queryTxt: String, category: ContentCategory, localData: [Content]?) -> Promise<[Content]> {
         let realm = try! Realm()
-        if AppConfiguration.isNetworkReachable {
+        if let localObjects = localData {
             return Promise([])
         } else {
             return Promise([])
@@ -60,18 +65,5 @@ extension ListSearchApi {
         }
         try! realm.commitWrite()
         return contentArray
-    }
-    
-    static func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
-        var modifiedDictionary = dictionary
-        if modifiedDictionary.keys.contains("release_date") {
-            let releaseDate = (modifiedDictionary["release_date"] as? String)?.toDate(withFormat: "yyyy-MM-dd")
-            modifiedDictionary["releaseDate"] = releaseDate
-        }
-        if modifiedDictionary.keys.contains("vote_average") {
-            modifiedDictionary["voteAverage"] = modifiedDictionary["vote_average"]
-            modifiedDictionary["posterPath"] = modifiedDictionary["poster_path"]
-        }
-        return modifiedDictionary
     }
 }
