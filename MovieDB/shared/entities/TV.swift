@@ -9,6 +9,6 @@
 import UIKit
 import RealmSwift
 
-class TVShow: Object {
-    
+class TV: VideoContent {
+    @objc dynamic var name: String = ""
 }

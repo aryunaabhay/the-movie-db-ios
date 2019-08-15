@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import Promises
 
 enum HttpVerb: String {
     case get, post , put, head, delete, patch
@@ -31,14 +32,6 @@ enum HttpVerb: String {
     }
 }
 
-enum RequestEncoding {
-    case queryString, body
-    
-    var alamofireEncoding: Alamofire.ParameterEncoding {
-        return URLEncoding.methodDependent
-    }
-}
-
 class NetworkingClient {
    
     private var baseUrl: String
@@ -49,22 +42,24 @@ class NetworkingClient {
         self.apiKey = apiKey
     }
     
-    func request(verb: HttpVerb, endpoint: String, parameters: [String: String],
-                 encoding: RequestEncoding, completion: @escaping (Swift.Result<JSON, Error>) -> ()){
+    func request(verb: HttpVerb, endpoint: String, parameters: [String: String]) -> Promise<SwiftyJSON.JSON> {
+        
         let requestUrl = self.baseUrl + endpoint
         var modifiedParameters = parameters
         if let apiKey = self.apiKey {
             modifiedParameters["api_key"] = apiKey
         }
-        Alamofire.request(requestUrl,method: verb.alamofireVerb,
-        parameters: modifiedParameters, encoding: encoding.alamofireEncoding,
-        headers: nil).responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                completion(Swift.Result.success(json))
-            case .failure(let errorResult):
-                completion(Swift.Result.failure(errorResult))
+        
+        return Promise<SwiftyJSON.JSON> { fulfill, reject in
+            Alamofire.request(requestUrl,method: verb.alamofireVerb,
+            parameters: modifiedParameters, encoding: URLEncoding.methodDependent, headers: nil)
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    fulfill(JSON(value))
+                case .failure(let errorResult):
+                    reject(errorResult)
+                }
             }
         }
     }

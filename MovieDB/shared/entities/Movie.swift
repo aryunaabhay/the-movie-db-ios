@@ -9,6 +9,8 @@
 import UIKit
 import RealmSwift
 
-class Movie: Object {
-    
+class Movie: VideoContent {
+    @objc dynamic var video: Bool = false
+    @objc dynamic var title: String = ""
+    @objc dynamic var releaseDate: Date? = nil
 }

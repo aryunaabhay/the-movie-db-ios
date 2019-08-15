@@ -7,16 +7,30 @@
 //
 
 import UIKit
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.setup()
         return true
+    }
+    
+    func setup(){
+        let reachabilityManager = NetworkReachabilityManager()
+        reachabilityManager?.listener = { status in
+            switch status {
+            case .notReachable:
+                AppConfiguration.isNetworkReachable = false
+            case .reachable(_), .unknown:
+                AppConfiguration.isNetworkReachable = true
+            }
+        }
+        reachabilityManager?.startListening()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
