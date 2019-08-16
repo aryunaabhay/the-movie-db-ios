@@ -7,6 +7,7 @@ target 'MovieDB' do
   pod 'Alamofire', '4.8.2'
   pod 'SwiftyJSON', '5.0.0'
   pod 'PromisesSwift', '1.2.8'
+  pod 'ReactiveCocoa', '10.0.0'
   
   target 'MovieDBTests' do
     inherit! :search_paths

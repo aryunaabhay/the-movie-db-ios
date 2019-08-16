@@ -26,9 +26,7 @@ class ContentListTableController: UITableViewController, ReactiveDataView {
     }
     
     func configureSubviews(){
-        // title ?
-        // image view for poster
-        // textview for overview
+        // register cell
     }
     
     func databinding(){
