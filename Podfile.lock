@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.2)
+  - Kingfisher (5.7.1)
   - PromisesObjC (1.2.8)
   - PromisesSwift (1.2.8):
     - PromisesObjC (= 1.2.8)
@@ -16,6 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (= 4.8.2)
+  - Kingfisher (= 5.7.1)
   - PromisesSwift (= 1.2.8)
   - ReactiveCocoa (= 10.0.0)
   - RealmSwift (= 3.17.3)
@@ -25,6 +27,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Kingfisher
     - PromisesObjC
     - PromisesSwift
     - ReactiveCocoa
@@ -36,6 +39,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Kingfisher: 176d377ad339113c99ad4980cbae687f807e20fe
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   PromisesSwift: 37bad6f4daddb02f7c9c531efe91e8b21c13ee2f
   ReactiveCocoa: 6d4c37ba236f5d9a7a55b2172cd09f19ba85f574
@@ -45,6 +49,6 @@ SPEC CHECKSUMS:
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 7ee33e3da45e4dc0036e9f7f242e9d817d27530b
+PODFILE CHECKSUM: 9e3768e2d96fc59bea84e0d4fb70f979b7665a1b
 
 COCOAPODS: 1.7.5

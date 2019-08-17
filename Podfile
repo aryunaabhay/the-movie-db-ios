@@ -8,6 +8,7 @@ target 'MovieDB' do
   pod 'SwiftyJSON', '5.0.0'
   pod 'PromisesSwift', '1.2.8'
   pod 'ReactiveCocoa', '10.0.0'
+  pod 'Kingfisher', '5.7.1'
   
   target 'MovieDBTests' do
     inherit! :search_paths
