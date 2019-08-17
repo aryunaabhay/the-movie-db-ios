@@ -32,6 +32,21 @@ class ContentListViewModel {
         self.sortCategory = sortCategory
     }
     
+    func updateSelectedCategory(selectedIndex: Int) {
+        var selected = self.segmentCategories[selectedIndex].lowercased()
+        if selected == "top rated" {
+            selected = "top_rated"
+        }
+        if let selectedCategory = ContentCategory(rawValue: selected) {
+            self.updateSelectedCategory(selectedCategory)
+        }
+    }
+    
+    private func updateSelectedCategory(_ category: ContentCategory){
+        self.sortCategory = category
+        self.retrieveData()
+    }
+    
     func retrieveData(){
         self.dataState.value = .loading
         // TODO: check if we can abstract this more

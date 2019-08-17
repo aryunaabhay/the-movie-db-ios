@@ -33,21 +33,7 @@ class ContentListTableController: UITableViewController, ReactiveDataView {
     }
     
     func databinding(){
-        self.viewModel.viewState.producer.take(duringLifetimeOf: self).startWithValues { [weak self](state) in
-            guard let this = self else { return }
-            switch state {
-            case .start:
-                print("start")
-            case .dataLoaded:
-                this.tableView.reloadData()
-            case .loadingData:
-                print("loading")
-            case .noData:
-                 print("nodata")
-            case .errorLoadingData:
-                print("errorloading")
-            }
-        }
+        
     }
     
     func configureData(){

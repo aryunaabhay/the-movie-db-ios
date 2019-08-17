@@ -13,10 +13,13 @@ class ContentListViewController: UIViewController, ReactiveDataView {
     private var viewModel: ContentListViewModel
     private var tableViewController: ContentListTableController
     private var containerStackView = UIStackView()
+    private var categoriesSegmentedControl: UISegmentedControl
+    private var loader = UIActivityIndicatorView(style: .gray)
     
     init(viewModel: ContentListViewModel){
         self.viewModel = viewModel
         self.tableViewController = ContentListTableController(viewModel: viewModel)
+        self.categoriesSegmentedControl = UISegmentedControl(items: viewModel.segmentCategories)
         super.init(nibName: nil, bundle: nil)
         self.addChild(self.tableViewController)
     }
@@ -33,29 +36,57 @@ class ContentListViewController: UIViewController, ReactiveDataView {
     func configureSubviews(){
         self.navigationController?.navigationBar.isTranslucent = false
         self.title = self.viewModel.contentType == .movie ? "Movies" : "TVShows"
+        self.view.backgroundColor = UIColor.white
+        // container stack view
         self.containerStackView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(containerStackView)
         self.containerStackView.axis = .vertical
         self.containerStackView.snp.makeConstraints { (make) -> Void in
             make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
-        let segmentedControl = UISegmentedControl(items: ["popular", "top rated", "upcoming"])
-        segmentedControl.backgroundColor = UIColor(red: 1/255, green: 210/255, blue: 119/255, alpha: 1)
-        segmentedControl.tintColor = UIColor.white
-        segmentedControl.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(60)
+        // segmented control
+        self.categoriesSegmentedControl.backgroundColor = UIColor(red: 1/255, green: 210/255, blue: 119/255, alpha: 1)
+        self.categoriesSegmentedControl.tintColor = UIColor.white
+        self.categoriesSegmentedControl.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(40)
         }
-        segmentedControl.selectedSegmentIndex = 1
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        self.containerStackView.addArrangedSubview(segmentedControl)
-        // add search
+        self.categoriesSegmentedControl.selectedSegmentIndex = 0
+        //self.categoriesSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        self.containerStackView.addArrangedSubview(self.categoriesSegmentedControl)
+        // search
+        
+        // tableview
         self.tableViewController.view.translatesAutoresizingMaskIntoConstraints = false
         self.containerStackView.addArrangedSubview(self.tableViewController.view)
+        self.containerStackView.addArrangedSubview(self.loader)
        
     }
     
     func databinding() {
-        // react when all objects changes
+        self.categoriesSegmentedControl.reactive.controlEvents(.valueChanged).signal.observeValues { [weak self](segment) in
+            self?.viewModel.updateSelectedCategory(selectedIndex: segment.selectedSegmentIndex)
+        }
+        
+        self.viewModel.dataState.producer.take(duringLifetimeOf: self).startWithValues { [weak self](state) in
+            guard let this = self else { return }
+            switch state {
+            case .start:
+                print("start")
+            case .loaded:
+                this.loader.stopAnimating()
+                this.loader.isHidden = true
+                this.tableViewController.tableView.isHidden = false
+                this.tableViewController.tableView.reloadData()
+            case .loading:
+                this.loader.isHidden = false
+                this.tableViewController.tableView.isHidden = true
+                this.loader.startAnimating()
+            case .noData:
+                print("nodata")
+            case .errorLoading:
+                print("errorloading")
+            }
+        }
     }
     
     func configureData() {
