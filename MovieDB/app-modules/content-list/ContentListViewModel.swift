@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReactiveSwift
 
 enum ContentType {
     case tvshow, movie
@@ -21,7 +22,10 @@ class ContentListViewModel {
     var displayObjects: [VideoContent] = []
     var sortCategory: ContentCategory
     var contentType: ContentType
-    var viewState: ContentListViewState = .start
+    var viewState: MutableProperty<ContentListViewState> = MutableProperty(.start)
+    var segmentCategories: [String] {
+        return contentType == .movie ? ["Popular", "Top rated", "Upcoming"] : ["Popular", "Top rated"]
+    }
     
     init(contentType: ContentType, sortCategory: ContentCategory){
         self.contentType = contentType
@@ -29,20 +33,23 @@ class ContentListViewModel {
     }
     
     func retrieveData(){
+        self.viewState.value = .loadingData
         // TODO: check if we can abstract this better
         if self.contentType == .movie {
             MoviesService.listContent(sortedBy: self.sortCategory).then { [weak self] (movies) in
                 guard let this = self else { return }
-                this.viewState =  movies.count > 0 ? .dataLoaded : .noData
                 this.allObjects = movies
+                this.displayObjects = movies
+                this.viewState.value = movies.count > 0 ? .dataLoaded : .noData
             }.catch { [weak self] (error) in
                 self?.handleError(error)
             }
         } else {
             TVShowsService.listContent(sortedBy: self.sortCategory).then { [weak self] (shows) in
                 guard let this = self else { return }
-                this.viewState =  shows.count > 0 ? .dataLoaded : .noData
                 this.allObjects = shows
+                this.displayObjects = shows
+                this.viewState.value = shows.count > 0 ? .dataLoaded : .noData
             }.catch { [weak self] (error) in
                 self?.handleError(error)
             }
@@ -50,6 +57,6 @@ class ContentListViewModel {
     }
     
     func handleError(_ error: Error){
-        self.viewState = .errorLoadingData
+        self.viewState.value = .errorLoadingData
     }
 }

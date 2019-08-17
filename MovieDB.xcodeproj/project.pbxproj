@@ -22,6 +22,8 @@
 		98CA3A472305193F00B3B279 /* ContentListTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A462305193F00B3B279 /* ContentListTableController.swift */; };
 		98CA3A492305195900B3B279 /* ContentListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A482305195900B3B279 /* ContentListRouter.swift */; };
 		98CA3A4D2305AF8000B3B279 /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A4C2305AF8000B3B279 /* ViewProtocols.swift */; };
+		98CA3A5123075C6800B3B279 /* VideoContentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA3A5023075C6800B3B279 /* VideoContentListCell.xib */; };
+		98CA3A5323075C8000B3B279 /* VideoContentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A5223075C8000B3B279 /* VideoContentListCell.swift */; };
 		98ECF3632302F35F005FC3DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ECF3622302F35F005FC3DA /* AppDelegate.swift */; };
 		98ECF3682302F35F005FC3DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF3662302F35F005FC3DA /* Main.storyboard */; };
 		98ECF36A2302F360005FC3DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF3692302F360005FC3DA /* Assets.xcassets */; };
@@ -70,6 +72,8 @@
 		98CA3A462305193F00B3B279 /* ContentListTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListTableController.swift; sourceTree = "<group>"; };
 		98CA3A482305195900B3B279 /* ContentListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListRouter.swift; sourceTree = "<group>"; };
 		98CA3A4C2305AF8000B3B279 /* ViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
+		98CA3A5023075C6800B3B279 /* VideoContentListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoContentListCell.xib; sourceTree = "<group>"; };
+		98CA3A5223075C8000B3B279 /* VideoContentListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentListCell.swift; sourceTree = "<group>"; };
 		98ECF35F2302F35F005FC3DA /* MovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ECF3622302F35F005FC3DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98ECF3672302F35F005FC3DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 		9825B2E52303786B008C9EC9 /* content-list */ = {
 			isa = PBXGroup;
 			children = (
+				98CA3A4F23075BFE00B3B279 /* cells */,
 				98CA3A3F2304DC6200B3B279 /* ContentListViewModel.swift */,
 				98CA3A442305192600B3B279 /* ContentListViewController.swift */,
 				98CA3A462305193F00B3B279 /* ContentListTableController.swift */,
@@ -187,6 +192,7 @@
 		9873236B23030B4F00239ED3 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				98CA3A542307646B00B3B279 /* fonts */,
 				98CA3A4B2305AF6F00B3B279 /* protocols */,
 				98CA3A412304EBBE00B3B279 /* utilities */,
 				98CA3A3323039CD100B3B279 /* services */,
@@ -236,6 +242,22 @@
 				98CA3A4C2305AF8000B3B279 /* ViewProtocols.swift */,
 			);
 			path = protocols;
+			sourceTree = "<group>";
+		};
+		98CA3A4F23075BFE00B3B279 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				98CA3A5023075C6800B3B279 /* VideoContentListCell.xib */,
+				98CA3A5223075C8000B3B279 /* VideoContentListCell.swift */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		98CA3A542307646B00B3B279 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		98ECF3562302F35F005FC3DA = {
@@ -403,6 +425,7 @@
 				98ECF36D2302F360005FC3DA /* LaunchScreen.storyboard in Resources */,
 				98ECF36A2302F360005FC3DA /* Assets.xcassets in Resources */,
 				98ECF3682302F35F005FC3DA /* Main.storyboard in Resources */,
+				98CA3A5123075C6800B3B279 /* VideoContentListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +539,7 @@
 				98CA3A3623039D4600B3B279 /* MoviesService.swift in Sources */,
 				9825B2EC23037BE7008C9EC9 /* TV.swift in Sources */,
 				9825B2E8230379C7008C9EC9 /* AppConfiguration.swift in Sources */,
+				98CA3A5323075C8000B3B279 /* VideoContentListCell.swift in Sources */,
 				98CA3A3A2304BFBB00B3B279 /* VideoContent.swift in Sources */,
 				9825B2EA23037B94008C9EC9 /* Movie.swift in Sources */,
 				98CA3A432304EBD100B3B279 /* StringUtilities.swift in Sources */,

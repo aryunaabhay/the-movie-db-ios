@@ -11,6 +11,7 @@ import RealmSwift
 
 class VideoContent: Object {
     @objc dynamic var id: Int64 = 0
+    @objc dynamic var title: String = ""
     @objc dynamic var overview: String = ""
     @objc dynamic var posterPath: String = ""
     @objc dynamic var popularity: Double = 0.0

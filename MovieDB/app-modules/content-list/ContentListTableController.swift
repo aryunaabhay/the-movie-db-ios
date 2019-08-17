@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReactiveCocoa
 
 class ContentListTableController: UITableViewController, ReactiveDataView {
     var viewModel: ContentListViewModel
@@ -26,14 +27,52 @@ class ContentListTableController: UITableViewController, ReactiveDataView {
     }
     
     func configureSubviews(){
-        // register cell
+        let cellIdentifier = VideoContentListCell.cellIdentifier
+        let cellNib = UINib(nibName: cellIdentifier, bundle: nil)
+        self.tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
     }
     
     func databinding(){
-        //databinding react to states and to data ?
+        self.viewModel.viewState.producer.take(duringLifetimeOf: self).startWithValues { [weak self](state) in
+            guard let this = self else { return }
+            switch state {
+            case .start:
+                print("start")
+            case .dataLoaded:
+                this.tableView.reloadData()
+            case .loadingData:
+                print("loading")
+            case .noData:
+                 print("nodata")
+            case .errorLoadingData:
+                print("errorloading")
+            }
+        }
     }
     
     func configureData(){
-        //request data from vm
+        self.viewModel.retrieveData()
+    }
+}
+
+//MARK: Table delegate methods
+extension ContentListTableController {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.viewModel.displayObjects.value.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let content = self.viewModel.displayObjects.value[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: VideoContentListCell.cellIdentifier, for: indexPath) as! VideoContentListCell
+        cell.titleLabel.text = content.title
+        cell.voteAvgLabel.text = String(content.voteAverage)
+        cell.popularityLabel.text = String(content.popularity)
+        cell.selectionStyle = .none
+        return cell
     }
 }

@@ -7,7 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 class ContentListRouter {
-    // create content list controller for movies or tv shows and its dependencies
+    
+    static func contentListScreen() -> UIViewController {
+        let viewModel = ContentListViewModel(contentType: .movie, sortCategory: .popular)
+        return ContentListViewController(viewModel: viewModel)
+    }
 }

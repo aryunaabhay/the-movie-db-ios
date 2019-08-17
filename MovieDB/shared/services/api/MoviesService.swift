@@ -14,12 +14,12 @@ class MoviesService: ApiOperationsProtocol {
     static func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
         var modifiedDictionary = dictionary
         if modifiedDictionary.keys.contains("release_date") {
-            let releaseDate = (modifiedDictionary["release_date"] as? String)?.toDate(withFormat: "yyyy-MM-dd")
+            let releaseDate = (dictionary["release_date"] as? String)?.toDate(withFormat: "yyyy-MM-dd")
             modifiedDictionary["releaseDate"] = releaseDate
         }
         if modifiedDictionary.keys.contains("vote_average") {
-            modifiedDictionary["voteAverage"] = modifiedDictionary["vote_average"]
-            modifiedDictionary["posterPath"] = modifiedDictionary["poster_path"]
+            modifiedDictionary["voteAverage"] = dictionary["vote_average"]
+            modifiedDictionary["posterPath"] = dictionary["poster_path"]
         }
         return modifiedDictionary
     }

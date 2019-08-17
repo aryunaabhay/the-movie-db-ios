@@ -14,8 +14,9 @@ class TVShowsService: ApiOperationsProtocol {
     static func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
         var modifiedDictionary = dictionary
         if modifiedDictionary.keys.contains("vote_average") {
-            modifiedDictionary["voteAverage"] = modifiedDictionary["vote_average"]
-            modifiedDictionary["posterPath"] = modifiedDictionary["poster_path"]
+            modifiedDictionary["voteAverage"] = dictionary["vote_average"]
+            modifiedDictionary["posterPath"] = dictionary["poster_path"]
+            modifiedDictionary["title"] = dictionary["name"]
         }
         return modifiedDictionary
     }
