@@ -13,8 +13,8 @@ enum ContentType {
     case tvshow, movie
 }
 
-enum ContentListViewState {
-    case start, loadingData, noData, dataLoaded, errorLoadingData
+enum ContentListDataState {
+    case start, loading, noData, loaded, errorLoading
 }
 
 class ContentListViewModel {
@@ -22,7 +22,7 @@ class ContentListViewModel {
     var displayObjects: [VideoContent] = []
     var sortCategory: ContentCategory
     var contentType: ContentType
-    var viewState: MutableProperty<ContentListViewState> = MutableProperty(.start)
+    var dataState: MutableProperty<ContentListDataState> = MutableProperty(.start)
     var segmentCategories: [String] {
         return contentType == .movie ? ["Popular", "Top rated", "Upcoming"] : ["Popular", "Top rated"]
     }
@@ -33,23 +33,25 @@ class ContentListViewModel {
     }
     
     func retrieveData(){
-        self.viewState.value = .loadingData
-        // TODO: check if we can abstract this better
+        self.dataState.value = .loading
+        // TODO: check if we can abstract this more
         if self.contentType == .movie {
-            MoviesService.listContent(sortedBy: self.sortCategory).then { [weak self] (movies) in
+            let moviesApiService = MoviesApiService(networkingClient: AppConfiguration.movieDBNetworkingClient)
+            moviesApiService.listContent(sortedBy: self.sortCategory).then { [weak self] (movies) in
                 guard let this = self else { return }
                 this.allObjects = movies
                 this.displayObjects = movies
-                this.viewState.value = movies.count > 0 ? .dataLoaded : .noData
+                this.dataState.value = movies.count > 0 ? .loaded : .noData
             }.catch { [weak self] (error) in
                 self?.handleError(error)
             }
         } else {
-            TVShowsService.listContent(sortedBy: self.sortCategory).then { [weak self] (shows) in
+            let showsApiService = TVShowsApiService(networkingClient: AppConfiguration.movieDBNetworkingClient)
+            showsApiService.listContent(sortedBy: self.sortCategory).then { [weak self] (shows) in
                 guard let this = self else { return }
                 this.allObjects = shows
                 this.displayObjects = shows
-                this.viewState.value = shows.count > 0 ? .dataLoaded : .noData
+                this.dataState.value = shows.count > 0 ? .loaded : .noData
             }.catch { [weak self] (error) in
                 self?.handleError(error)
             }
@@ -57,6 +59,6 @@ class ContentListViewModel {
     }
     
     func handleError(_ error: Error){
-        self.viewState.value = .errorLoadingData
+        self.dataState.value = .errorLoading
     }
 }

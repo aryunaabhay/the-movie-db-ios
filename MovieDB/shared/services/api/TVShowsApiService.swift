@@ -1,5 +1,5 @@
 //
-//  TVShowsService.swift
+//  TVShowsApiService.swift
 //  MovieDB
 //
 //  Created by Aryuna on 8/14/19.
@@ -8,10 +8,15 @@
 
 import Foundation
 
-class TVShowsService: ApiOperationsProtocol {
+class TVShowsApiService: ApiOperationsProtocol {
     typealias Content = TV
+    var networkingClient: NetworkingClient
     
-    static func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
+    required init(networkingClient: NetworkingClient){
+        self.networkingClient = networkingClient
+    }
+    
+    func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
         var modifiedDictionary = dictionary
         if modifiedDictionary.keys.contains("vote_average") {
             modifiedDictionary["voteAverage"] = dictionary["vote_average"]

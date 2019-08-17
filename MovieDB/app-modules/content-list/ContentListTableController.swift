@@ -63,11 +63,11 @@ extension ContentListTableController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.displayObjects.value.count
+        return self.viewModel.displayObjects.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let content = self.viewModel.displayObjects.value[indexPath.row]
+        let content = self.viewModel.displayObjects[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: VideoContentListCell.cellIdentifier, for: indexPath) as! VideoContentListCell
         cell.titleLabel.text = content.title
         cell.voteAvgLabel.text = String(content.voteAverage)

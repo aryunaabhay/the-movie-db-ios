@@ -1,5 +1,5 @@
 //
-//  MovieService.swift
+//  MoviesApiService.swift
 //  MovieDB
 //
 //  Created by Aryuna on 8/14/19.
@@ -8,10 +8,15 @@
 
 import Foundation
 
-class MoviesService: ApiOperationsProtocol {
+class MoviesApiService: ApiOperationsProtocol {
     typealias Content = Movie
+    var networkingClient: NetworkingClient
     
-    static func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
+    required init(networkingClient: NetworkingClient){
+        self.networkingClient = networkingClient
+    }
+    
+    func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
         var modifiedDictionary = dictionary
         if modifiedDictionary.keys.contains("release_date") {
             let releaseDate = (dictionary["release_date"] as? String)?.toDate(withFormat: "yyyy-MM-dd")
