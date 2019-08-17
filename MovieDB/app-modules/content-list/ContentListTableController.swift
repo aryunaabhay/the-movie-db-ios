@@ -27,6 +27,7 @@ class ContentListTableController: UITableViewController, ReactiveDataView {
     }
     
     func configureSubviews(){
+        self.tableView.rowHeight = 90
         let cellIdentifier = VideoContentListCell.cellIdentifier
         let cellNib = UINib(nibName: cellIdentifier, bundle: nil)
         self.tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
@@ -58,6 +59,7 @@ extension ContentListTableController {
         cell.titleLabel.text = content.title
         cell.voteAvgLabel.text = String(content.voteAverage)
         cell.popularityLabel.text = String(content.popularity)
+        cell.configureImage(urlString: "https://image.tmdb.org/t/p/w200/" + content.posterPath)
         cell.selectionStyle = .none
         return cell
     }

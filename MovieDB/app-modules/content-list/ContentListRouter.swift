@@ -11,8 +11,8 @@ import UIKit
 
 class ContentListRouter {
     
-    static func contentListScreen() -> UIViewController {
-        let viewModel = ContentListViewModel(contentType: .movie, sortCategory: .popular)
+    static func contentListScreen(contentType: ContentType) -> UIViewController {
+        let viewModel = ContentListViewModel(contentType: contentType, sortCategory: .popular)
         return ContentListViewController(viewModel: viewModel)
     }
 }

@@ -24,6 +24,7 @@
 		98CA3A4D2305AF8000B3B279 /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A4C2305AF8000B3B279 /* ViewProtocols.swift */; };
 		98CA3A5123075C6800B3B279 /* VideoContentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA3A5023075C6800B3B279 /* VideoContentListCell.xib */; };
 		98CA3A5323075C8000B3B279 /* VideoContentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A5223075C8000B3B279 /* VideoContentListCell.swift */; };
+		98CA3A582308ABE200B3B279 /* MainScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A572308ABE200B3B279 /* MainScreenRouter.swift */; };
 		98ECF3632302F35F005FC3DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ECF3622302F35F005FC3DA /* AppDelegate.swift */; };
 		98ECF3682302F35F005FC3DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF3662302F35F005FC3DA /* Main.storyboard */; };
 		98ECF36A2302F360005FC3DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF3692302F360005FC3DA /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 		98CA3A4C2305AF8000B3B279 /* ViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
 		98CA3A5023075C6800B3B279 /* VideoContentListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoContentListCell.xib; sourceTree = "<group>"; };
 		98CA3A5223075C8000B3B279 /* VideoContentListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentListCell.swift; sourceTree = "<group>"; };
+		98CA3A572308ABE200B3B279 /* MainScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenRouter.swift; sourceTree = "<group>"; };
 		98ECF35F2302F35F005FC3DA /* MovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ECF3622302F35F005FC3DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98ECF3672302F35F005FC3DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		98CA3A4A2305ABEF00B3B279 /* main-screen */ = {
 			isa = PBXGroup;
 			children = (
+				98CA3A572308ABE200B3B279 /* MainScreenRouter.swift */,
 			);
 			path = "main-screen";
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				98CA3A402304DC6200B3B279 /* ContentListViewModel.swift in Sources */,
 				98CA3A472305193F00B3B279 /* ContentListTableController.swift in Sources */,
 				98CA3A492305195900B3B279 /* ContentListRouter.swift in Sources */,
+				98CA3A582308ABE200B3B279 /* MainScreenRouter.swift in Sources */,
 				98CA3A3C2304CC5C00B3B279 /* ApiOperationsProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
