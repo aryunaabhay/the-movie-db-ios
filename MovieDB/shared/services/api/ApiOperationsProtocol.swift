@@ -11,17 +11,20 @@ import SwiftyJSON
 import Promises
 import RealmSwift
 
-//TODO: get a better name
-protocol ApiOperationsProtocol: class {
+protocol ApiObjectOperations: class {
     associatedtype Content: Object
     var networkingClient: NetworkingClient { get set }
     func listContent(sortedBy category: ContentCategory) -> Promise<[Content]>
     func search(queryTxt: String, category: ContentCategory, localData: [Content]?) -> Promise<[Content]>
+}
+
+protocol JSONObjectMapping {
+    associatedtype Content: Object
     func mapping(jsonResponse: JSON) -> [Content]
     func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any]
 }
 
-extension ApiOperationsProtocol {
+extension ApiObjectOperations where Self: JSONObjectMapping {
 
     //list content by category
     func listContent(sortedBy category: ContentCategory) -> Promise<[Content]> {
@@ -52,7 +55,9 @@ extension ApiOperationsProtocol {
             return Promise([])
         }
     }
-    
+}
+
+extension JSONObjectMapping {
     func mapping(jsonResponse: JSON) -> [Content] {
         let realm = try! Realm()
         var contentArray: [Content] = []

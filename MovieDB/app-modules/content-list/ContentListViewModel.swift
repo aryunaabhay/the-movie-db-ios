@@ -18,10 +18,10 @@ enum ContentListDataState {
 }
 
 class ContentListViewModel {
-    var allObjects: [VideoContent] = []
-    var displayObjects: [VideoContent] = []
     var sortCategory: ContentCategory
     var contentType: ContentType
+    var allObjects: [VideoContent] = []
+    var displayObjects: [VideoContent] = []
     var dataState: MutableProperty<ContentListDataState> = MutableProperty(.start)
     var segmentCategories: [String] {
         return contentType == .movie ? ["Popular", "Top rated", "Upcoming"] : ["Popular", "Top rated"]

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TVShowsApiService: ApiOperationsProtocol {
+class TVShowsApiService: ApiObjectOperations, JSONObjectMapping {
     typealias Content = TV
     var networkingClient: NetworkingClient
     

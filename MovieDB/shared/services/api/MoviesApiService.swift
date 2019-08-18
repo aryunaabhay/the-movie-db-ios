@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MoviesApiService: ApiOperationsProtocol {
+class MoviesApiService: ApiObjectOperations, JSONObjectMapping {
     typealias Content = Movie
     var networkingClient: NetworkingClient
     

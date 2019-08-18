@@ -28,6 +28,7 @@
 		98CA3A5A2308AE5F00B3B279 /* VideoContentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A592308AE5F00B3B279 /* VideoContentDetailViewController.swift */; };
 		98CA3A5C2308AEC700B3B279 /* VideoContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A5B2308AEC700B3B279 /* VideoContentDetailViewModel.swift */; };
 		98CA3A5E2308AFE100B3B279 /* VideoContentDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A5D2308AFE100B3B279 /* VideoContentDetailRouter.swift */; };
+		98CA3A6023099DCA00B3B279 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A5F23099DCA00B3B279 /* NetworkConnectionManager.swift */; };
 		98ECF3632302F35F005FC3DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ECF3622302F35F005FC3DA /* AppDelegate.swift */; };
 		98ECF3682302F35F005FC3DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF3662302F35F005FC3DA /* Main.storyboard */; };
 		98ECF36A2302F360005FC3DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF3692302F360005FC3DA /* Assets.xcassets */; };
@@ -82,6 +83,7 @@
 		98CA3A592308AE5F00B3B279 /* VideoContentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentDetailViewController.swift; sourceTree = "<group>"; };
 		98CA3A5B2308AEC700B3B279 /* VideoContentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentDetailViewModel.swift; sourceTree = "<group>"; };
 		98CA3A5D2308AFE100B3B279 /* VideoContentDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentDetailRouter.swift; sourceTree = "<group>"; };
+		98CA3A5F23099DCA00B3B279 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
 		98ECF35F2302F35F005FC3DA /* MovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ECF3622302F35F005FC3DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98ECF3672302F35F005FC3DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				98CA3A3423039CFC00B3B279 /* api */,
+				98CA3A5F23099DCA00B3B279 /* NetworkConnectionManager.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				98CA3A3623039D4600B3B279 /* MoviesApiService.swift in Sources */,
 				9825B2EC23037BE7008C9EC9 /* TV.swift in Sources */,
 				98CA3A5E2308AFE100B3B279 /* VideoContentDetailRouter.swift in Sources */,
+				98CA3A6023099DCA00B3B279 /* NetworkConnectionManager.swift in Sources */,
 				9825B2E8230379C7008C9EC9 /* AppConfiguration.swift in Sources */,
 				98CA3A5323075C8000B3B279 /* VideoContentListCell.swift in Sources */,
 				98CA3A3A2304BFBB00B3B279 /* VideoContent.swift in Sources */,
@@ -744,6 +748,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B35ZTZAERS;
 				INFOPLIST_FILE = MovieDB/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -762,6 +767,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B35ZTZAERS;
 				INFOPLIST_FILE = MovieDB/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
