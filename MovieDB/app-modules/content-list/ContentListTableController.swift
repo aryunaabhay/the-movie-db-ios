@@ -54,13 +54,18 @@ extension ContentListTableController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let content = self.viewModel.displayObjects[indexPath.row]
+        let videoContent = self.viewModel.displayObjects[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: VideoContentListCell.cellIdentifier, for: indexPath) as! VideoContentListCell
-        cell.titleLabel.text = content.title
-        cell.voteAvgLabel.text = String(content.voteAverage)
-        cell.popularityLabel.text = String(content.popularity)
-        cell.configureImage(urlString: "https://image.tmdb.org/t/p/w200/" + content.posterPath)
+        cell.titleLabel.text = videoContent.title
+        cell.voteAvgLabel.text = String(videoContent.voteAverage)
+        cell.popularityLabel.text = String(videoContent.popularity)
+        cell.configureImage(urlString: "https://image.tmdb.org/t/p/w200/" + videoContent.posterPath)
         cell.selectionStyle = .none
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let videoContent = self.viewModel.displayObjects[indexPath.row]
+        VideoContentDetailRouter.navigateToVideoDetail(videoContent: videoContent, presenter: self)
     }
 }

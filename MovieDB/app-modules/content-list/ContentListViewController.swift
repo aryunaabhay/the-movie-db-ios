@@ -33,6 +33,11 @@ class ContentListViewController: UIViewController, ReactiveDataView {
         self.configure()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     func configureSubviews(){
         self.navigationController?.navigationBar.isTranslucent = false
         self.title = self.viewModel.contentType == .movie ? "Movies" : "TVShows"
@@ -45,14 +50,15 @@ class ContentListViewController: UIViewController, ReactiveDataView {
             make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
         // segmented control
-        self.categoriesSegmentedControl.backgroundColor = UIColor(red: 1/255, green: 210/255, blue: 119/255, alpha: 1)
-        self.categoriesSegmentedControl.tintColor = UIColor.white
+        self.categoriesSegmentedControl.tintColor = UIColor(red: 1/255, green: 210/255, blue: 119/255, alpha: 1)
+        self.categoriesSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        self.containerStackView.addArrangedSubview(self.categoriesSegmentedControl)
         self.categoriesSegmentedControl.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(40)
         }
         self.categoriesSegmentedControl.selectedSegmentIndex = 0
-        //self.categoriesSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        self.containerStackView.addArrangedSubview(self.categoriesSegmentedControl)
+        
+        
         // search
         
         // tableview

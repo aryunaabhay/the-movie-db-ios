@@ -11,12 +11,10 @@ import UIKit
 
 class MainScreenRouter {
     
-    static func mainScreen(delegate: UITabBarControllerDelegate? = nil) -> UITabBarController {
-        let moviesListScreen = ContentListRouter.contentListScreen(contentType: .movie)
-        let moviesNavigationController = UINavigationController(rootViewController: moviesListScreen)
-        let showsListScreen = ContentListRouter.contentListScreen(contentType: .tvshow)
-        let showsNavigationController = UINavigationController(rootViewController: showsListScreen)
-        let mainTabBar = MainScreenRouter.tabBar(viewControllers: [moviesNavigationController, showsNavigationController], delegate: delegate)
+    static func mainScreen(delegate: UITabBarControllerDelegate? = nil) -> UIViewController {
+        let moviesListScreen = UINavigationController(rootViewController: ContentListRouter.contentListScreen(contentType: .movie))
+        let showsListScreen = UINavigationController(rootViewController: ContentListRouter.contentListScreen(contentType: .tvshow))
+        let mainTabBar = MainScreenRouter.tabBar(viewControllers: [moviesListScreen, showsListScreen], delegate: delegate)
         return mainTabBar
     }
     
