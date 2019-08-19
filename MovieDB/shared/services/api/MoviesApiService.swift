@@ -17,10 +17,10 @@ class MoviesApiService: ApiService<Movie> {
             modifiedDictionary["releaseDate"] = releaseDate
         }
         if modifiedDictionary.keys.contains("vote_average") {
-            modifiedDictionary["voteAverage"] = dictionary["vote_average"]
+            modifiedDictionary["voteAverage"] = dictionary["vote_average"] ?? 0.0
         }
         if modifiedDictionary.keys.contains("poster_path") {
-            modifiedDictionary["posterPath"] = dictionary["poster_path"]
+            modifiedDictionary["posterPath"] = (dictionary["poster_path"] as? String)?.removingPercentEncoding ?? ""
         }
         
         return modifiedDictionary

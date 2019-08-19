@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         self.setup()
         return true
     }
@@ -25,9 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppConfiguration.isNetworkReachable = reachable
         }
         self.window?.rootViewController = MainScreenRouter.mainScreen()
-        UINavigationBar.appearance().titleTextAttributes =
-            [NSAttributedString.Key.foregroundColor: Colors.primaryDark,
-             NSAttributedString.Key.font: UIFont(name: "Front Page Neue", size: 21)!]
+        Appearance.defaultNavigationAppearance()
     }
 }
 

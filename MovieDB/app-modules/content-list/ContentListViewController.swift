@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import ReactiveSwift
+import ReactiveCocoa
 
 class ContentListViewController: UIViewController, ReactiveDataView {
     private let viewModel: ContentListViewModel
@@ -16,6 +18,7 @@ class ContentListViewController: UIViewController, ReactiveDataView {
     private let categoriesSegmentedControl: UISegmentedControl
     private let searchBar = UISearchBar(frame: .zero)
     private let loader = UIActivityIndicatorView(style: .gray)
+    private let noDataLabel = UILabel(frame: .zero)
     
     init(viewModel: ContentListViewModel){
         self.viewModel = viewModel
@@ -41,7 +44,7 @@ class ContentListViewController: UIViewController, ReactiveDataView {
     
     func configureSubviews(){
         self.navigationController?.navigationBar.isTranslucent = false
-        self.title = self.viewModel.contentType == .movie ? "Movies" : "TVShows"
+        self.title = self.viewModel.contentType == .movie ? "Movies" : "TV Shows"
         self.view.backgroundColor = UIColor.white
         self.configureContainerStack()
         self.configureSegmentedControl()
@@ -81,6 +84,7 @@ class ContentListViewController: UIViewController, ReactiveDataView {
         self.searchBar.delegate = self
         self.searchBar.barTintColor = Colors.primaryLight
         self.containerStackView.addArrangedSubview(self.searchBar)
+        self.searchBar.placeholder = "Search"
         self.searchBar.snp.makeConstraints { (make) in
             make.height.equalTo(50)
         }
@@ -90,11 +94,19 @@ class ContentListViewController: UIViewController, ReactiveDataView {
         self.tableViewController.view.translatesAutoresizingMaskIntoConstraints = false
         self.containerStackView.addArrangedSubview(self.tableViewController.view)
         self.containerStackView.addArrangedSubview(self.loader)
+        self.containerStackView.addArrangedSubview(self.noDataLabel)
+        self.loader.isHidden = true
+        self.noDataLabel.isHidden = true
+        self.noDataLabel.textAlignment = .center
+        self.noDataLabel.textColor = Colors.primaryDark
+        self.noDataLabel.font = Fonts.titleFont
     }
     
     func databinding() {
         self.categoriesSegmentedControl.reactive.controlEvents(.valueChanged).signal.observeValues { [weak self](segment) in
-            self?.viewModel.updateSelectedCategory(selectedIndex: segment.selectedSegmentIndex)
+            guard let this = self else { return }
+            this.viewModel.updateSelectedCategory(selectedIndex: segment.selectedSegmentIndex)
+            this.searchBarCancelButtonClicked(this.searchBar)
         }
         
         self.viewModel.dataState.producer.take(duringLifetimeOf: self).startWithValues { [weak self](state) in
@@ -107,15 +119,24 @@ class ContentListViewController: UIViewController, ReactiveDataView {
                 this.loader.isHidden = true
                 this.tableViewController.tableView.isHidden = false
                 this.tableViewController.tableView.reloadData()
+                this.tableViewController.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             case .loading:
                 this.loader.isHidden = false
                 this.tableViewController.tableView.isHidden = true
                 this.loader.startAnimating()
             case .noData:
-                print("nodata")
+                this.loader.isHidden = true
+                this.tableViewController.tableView.isHidden = true
+                this.noDataLabel.text = "Not found"
+                this.noDataLabel.isHidden = false
             case .errorLoading:
                 print("errorloading")
             }
+        }
+        
+        self.searchBar.reactive.continuousTextValues.take(duringLifetimeOf: self).throttle(0.5, on: QueueScheduler.main).observeValues { [weak self](text) in
+            guard let this = self, let searchText = text else { return }
+            this.viewModel.searchContent(by: searchText)
         }
     }
     
@@ -125,10 +146,6 @@ class ContentListViewController: UIViewController, ReactiveDataView {
 }
 
 extension ContentListViewController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.viewModel.searchContent(by: searchText)
-    }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.searchBar.showsCancelButton = true

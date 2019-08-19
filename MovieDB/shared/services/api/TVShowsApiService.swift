@@ -12,9 +12,9 @@ class TVShowsApiService: ApiService<TV> {
     override func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
         var modifiedDictionary = dictionary
         if modifiedDictionary.keys.contains("vote_average") {
-            modifiedDictionary["voteAverage"] = dictionary["vote_average"]
-            modifiedDictionary["posterPath"] = dictionary["poster_path"]
-            modifiedDictionary["title"] = dictionary["name"]
+            modifiedDictionary["voteAverage"] = dictionary["vote_average"] ?? 0.0
+            modifiedDictionary["posterPath"] = (dictionary["poster_path"] as? String)?.removingPercentEncoding ?? ""
+            modifiedDictionary["title"] = dictionary["name"] ?? ""
         }
         return modifiedDictionary
     }

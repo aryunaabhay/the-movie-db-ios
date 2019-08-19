@@ -111,7 +111,7 @@ class VideoContentDetailViewController: UIViewController, ReactiveDataView {
         self.titleLabel.textColor = Colors.primaryDark
         self.titleLabel.textAlignment = .left
         self.titleLabel.numberOfLines = -1
-        self.titleLabel.font = UIFont(name: "Front Page Neue", size: 30)
+        self.titleLabel.font = Fonts.titleFont.withSize(30)
         self.containerStackView.addArrangedSubview(self.titleLabel)
     }
     
