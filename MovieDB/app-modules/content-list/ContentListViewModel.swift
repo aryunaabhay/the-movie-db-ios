@@ -55,13 +55,12 @@ class ContentListViewModel {
     
     func retrieveData(){
         self.dataState.value = .loading
-        self.apiService.listContent(sortedBy: self.sortCategory).then { [weak self] (objects) in
+        self.apiService.listContent(sortedBy: self.sortCategory, online: AppConfiguration.isNetworkReachable).then { [weak self] (objects) in
             guard let this = self else { return }
-            if let videoContentArray = objects as? [VideoContent] {
+            let videoContentArray = objects as? [VideoContent] ?? []
             this.allObjects = videoContentArray
             this.displayObjects = videoContentArray
             this.dataState.value = videoContentArray.count > 0 ? .loaded : .noData
-            }
         }.catch { [weak self] (error) in
             self?.handleError(error)
         }
@@ -72,6 +71,19 @@ class ContentListViewModel {
     }
     
     func searchContent(by text: String) {
-       self.dataState.value = .loading
+        if text.count < 4 { return }
+        self.dataState.value = .loading
+        let localObjects = AppConfiguration.isNetworkReachable ? nil : self.allObjects
+        self.apiService.search(queryTxt: text, objects: localObjects).then { [weak self](results) in
+            guard let this = self else { return }
+            let objectResults = results as? [VideoContent] ?? []
+            this.displayObjects = objectResults
+            this.dataState.value = objectResults.count > 0 ? .loaded : .noData
+        }
+    }
+    
+    func resetSearch(){
+        self.displayObjects = self.allObjects
+        self.dataState.value = .loaded
     }
 }

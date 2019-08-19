@@ -18,8 +18,11 @@ class MoviesApiService: ApiService<Movie> {
         }
         if modifiedDictionary.keys.contains("vote_average") {
             modifiedDictionary["voteAverage"] = dictionary["vote_average"]
+        }
+        if modifiedDictionary.keys.contains("poster_path") {
             modifiedDictionary["posterPath"] = dictionary["poster_path"]
         }
+        
         return modifiedDictionary
     }
 }

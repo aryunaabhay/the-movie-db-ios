@@ -51,7 +51,7 @@ class NetworkingClient {
         }
         
         return Promise<SwiftyJSON.JSON> { fulfill, reject in
-            Alamofire.request(requestUrl,method: verb.alamofireVerb,
+            Alamofire.request(requestUrl, method: verb.alamofireVerb,
             parameters: modifiedParameters, encoding: URLEncoding.methodDependent, headers: nil)
             .responseJSON { (response) in
                 switch response.result {

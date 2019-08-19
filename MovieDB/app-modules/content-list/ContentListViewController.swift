@@ -138,5 +138,6 @@ extension ContentListViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        self.viewModel.resetSearch()
     }
 }

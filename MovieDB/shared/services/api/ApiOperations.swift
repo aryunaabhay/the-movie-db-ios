@@ -14,8 +14,8 @@ import RealmSwift
 protocol ApiObjectOperations: class {
     var querySegment: String { get }
     var networkingClient: NetworkingClient { get set }
-    func listContent(sortedBy category: ContentCategory) -> Promise<[Object]>
-    func search(queryTxt: String, category: ContentCategory, localData: [Object]?) -> Promise<[Object]>
+    func listContent(sortedBy category: ContentCategory, online: Bool) -> Promise<[Object]>
+    func search(queryTxt: String, objects: [Object]?) -> Promise<[Object]>
 }
 
 protocol JSONObjectMapping {
@@ -33,16 +33,16 @@ class ApiService<T: Object>: ApiServible {
         self.networkingClient = networkingClient
     }
     
-    func listContent(sortedBy category: ContentCategory) -> Promise<[Object]> {
-        if AppConfiguration.isNetworkReachable {
+    func listContent(sortedBy category: ContentCategory, online: Bool) -> Promise<[Object]> {
+        if online {
             let querySegmentType = self.querySegment.lowercased()
             let endpoint = "\(querySegmentType)/\(category.rawValue)"
             let promise = self.networkingClient.request(verb: .get, endpoint: endpoint, parameters: [:])
-                .then { (json) -> Promise<[Object]> in
-                    let mappedContent = self.mapping(jsonResponse: json)
-                    return Promise(mappedContent)
-                }.catch { (error) in
-                    return Promise(error)
+            .then { (json) -> Promise<[Object]> in
+                let mappedContent = self.mapping(jsonResponse: json)
+                return Promise(mappedContent)
+            }.catch { (error) in
+                return Promise(error)
             }
             return promise
         } else {
@@ -52,12 +52,23 @@ class ApiService<T: Object>: ApiServible {
         }
     }
     
-    func search(queryTxt: String, category: ContentCategory, localData: [Object]?) -> Promise<[Object]> {
-        let realm = try! Realm()
-        if let localObjects = localData {
-            return Promise([])
+    func search(queryTxt: String, objects: [Object]?) -> Promise<[Object]> {
+        if let localObjects = objects {
+            //improve this to make more abstract and apply for more objects with an interface
+            let filtered = (localObjects as? [VideoContent])?.filter({ $0.title.contains(queryTxt) }) ?? []
+            return Promise(filtered)
         } else {
-            return Promise([])
+            let querySegmentType = self.querySegment.lowercased()
+            let endpoint = "search/\(querySegmentType)"
+            let params = ["query": queryTxt]
+            let promise = self.networkingClient.request(verb: .get, endpoint: endpoint, parameters: params)
+            .then { (json) -> Promise<[Object]> in
+                let mappedContent = self.mapping(jsonResponse: json)
+                return Promise(mappedContent)
+            }.catch { (error) in
+                return Promise(error)
+            }
+            return promise
         }
     }
     
