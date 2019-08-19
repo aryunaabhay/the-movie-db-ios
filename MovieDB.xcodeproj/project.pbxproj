@@ -29,6 +29,8 @@
 		98CA3A5C2308AEC700B3B279 /* VideoContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A5B2308AEC700B3B279 /* VideoContentDetailViewModel.swift */; };
 		98CA3A5E2308AFE100B3B279 /* VideoContentDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A5D2308AFE100B3B279 /* VideoContentDetailRouter.swift */; };
 		98CA3A6023099DCA00B3B279 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A5F23099DCA00B3B279 /* NetworkConnectionManager.swift */; };
+		98CA3A65230A19F400B3B279 /* FrontPageNews.otf in Resources */ = {isa = PBXBuildFile; fileRef = 98CA3A64230A19F400B3B279 /* FrontPageNews.otf */; };
+		98CA3A67230A1D7700B3B279 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A66230A1D7700B3B279 /* Colors.swift */; };
 		98ECF3632302F35F005FC3DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ECF3622302F35F005FC3DA /* AppDelegate.swift */; };
 		98ECF3682302F35F005FC3DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF3662302F35F005FC3DA /* Main.storyboard */; };
 		98ECF36A2302F360005FC3DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF3692302F360005FC3DA /* Assets.xcassets */; };
@@ -84,6 +86,8 @@
 		98CA3A5B2308AEC700B3B279 /* VideoContentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentDetailViewModel.swift; sourceTree = "<group>"; };
 		98CA3A5D2308AFE100B3B279 /* VideoContentDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentDetailRouter.swift; sourceTree = "<group>"; };
 		98CA3A5F23099DCA00B3B279 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
+		98CA3A64230A19F400B3B279 /* FrontPageNews.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FrontPageNews.otf; sourceTree = "<group>"; };
+		98CA3A66230A1D7700B3B279 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		98ECF35F2302F35F005FC3DA /* MovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ECF3622302F35F005FC3DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98ECF3672302F35F005FC3DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -205,7 +209,7 @@
 		9873236B23030B4F00239ED3 /* shared */ = {
 			isa = PBXGroup;
 			children = (
-				98CA3A542307646B00B3B279 /* fonts */,
+				98CA3A542307646B00B3B279 /* appearance */,
 				98CA3A4B2305AF6F00B3B279 /* protocols */,
 				98CA3A412304EBBE00B3B279 /* utilities */,
 				98CA3A3323039CD100B3B279 /* services */,
@@ -268,11 +272,13 @@
 			path = cells;
 			sourceTree = "<group>";
 		};
-		98CA3A542307646B00B3B279 /* fonts */ = {
+		98CA3A542307646B00B3B279 /* appearance */ = {
 			isa = PBXGroup;
 			children = (
+				98CA3A64230A19F400B3B279 /* FrontPageNews.otf */,
+				98CA3A66230A1D7700B3B279 /* Colors.swift */,
 			);
-			path = fonts;
+			path = appearance;
 			sourceTree = "<group>";
 		};
 		98ECF3562302F35F005FC3DA = {
@@ -440,6 +446,7 @@
 				98ECF36D2302F360005FC3DA /* LaunchScreen.storyboard in Resources */,
 				98ECF36A2302F360005FC3DA /* Assets.xcassets in Resources */,
 				98ECF3682302F35F005FC3DA /* Main.storyboard in Resources */,
+				98CA3A65230A19F400B3B279 /* FrontPageNews.otf in Resources */,
 				98CA3A5123075C6800B3B279 /* VideoContentListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,6 +559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98CA3A3623039D4600B3B279 /* MoviesApiService.swift in Sources */,
+				98CA3A67230A1D7700B3B279 /* Colors.swift in Sources */,
 				9825B2EC23037BE7008C9EC9 /* TV.swift in Sources */,
 				98CA3A5E2308AFE100B3B279 /* VideoContentDetailRouter.swift in Sources */,
 				98CA3A6023099DCA00B3B279 /* NetworkConnectionManager.swift in Sources */,

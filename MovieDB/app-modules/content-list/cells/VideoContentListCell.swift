@@ -23,7 +23,11 @@ class VideoContentListCell: UITableViewCell {
     
     func configure(){
         self.posterImageView.clipsToBounds = true
-        self.posterImageView.layer.cornerRadius = 8
+        self.posterImageView.layer.cornerRadius = 10
+        self.posterImageView.layer.borderColor = Colors.primaryLight.cgColor
+        self.posterImageView.layer.borderWidth = 2
+        self.popularityLabel.textColor = Colors.primaryDark
+        self.titleLabel.textColor = Colors.primaryDark
     }
     
     func configureImage(urlString: String){

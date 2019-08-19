@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppConfiguration.isNetworkReachable = reachable
         }
         self.window?.rootViewController = MainScreenRouter.mainScreen()
+        UINavigationBar.appearance().titleTextAttributes =
+            [NSAttributedString.Key.foregroundColor: Colors.primaryDark,
+             NSAttributedString.Key.font: UIFont(name: "Front Page Neue", size: 21)!]
     }
 }
 

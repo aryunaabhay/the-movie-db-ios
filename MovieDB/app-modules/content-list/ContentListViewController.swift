@@ -42,30 +42,47 @@ class ContentListViewController: UIViewController, ReactiveDataView {
         self.navigationController?.navigationBar.isTranslucent = false
         self.title = self.viewModel.contentType == .movie ? "Movies" : "TVShows"
         self.view.backgroundColor = UIColor.white
-        // container stack view
+        self.configureContainerStack()
+        self.configureSegmentedControl()
+        self.configureSearch()
+        self.configureTableView()
+    }
+    
+    func configureContainerStack(){
         self.containerStackView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(containerStackView)
         self.containerStackView.axis = .vertical
+        self.containerStackView.spacing = 8
         self.containerStackView.snp.makeConstraints { (make) -> Void in
             make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
-        // segmented control
-        self.categoriesSegmentedControl.tintColor = UIColor(red: 1/255, green: 210/255, blue: 119/255, alpha: 1)
+    }
+    
+    func configureSegmentedControl(){
+        self.categoriesSegmentedControl.tintColor = Colors.primaryLight
         self.categoriesSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        self.containerStackView.addArrangedSubview(self.categoriesSegmentedControl)
-        self.categoriesSegmentedControl.snp.makeConstraints { (make) -> Void in
-            make.height.equalTo(40)
-        }
         self.categoriesSegmentedControl.selectedSegmentIndex = 0
         
+        let segmentedControlContainerView = UIView()
+        segmentedControlContainerView.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControlContainerView.addSubview(self.categoriesSegmentedControl)
+        self.categoriesSegmentedControl.snp.makeConstraints { (make) -> Void in
+            make.edges.equalTo(segmentedControlContainerView).inset(UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15))
+        }
+        self.containerStackView.addArrangedSubview(segmentedControlContainerView)
+        segmentedControlContainerView.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(40)
+        }
+    }
+    
+    func configureSearch(){
         
-        // search
-        
-        // tableview
+    }
+    
+    func configureTableView(){
         self.tableViewController.view.translatesAutoresizingMaskIntoConstraints = false
         self.containerStackView.addArrangedSubview(self.tableViewController.view)
         self.containerStackView.addArrangedSubview(self.loader)
-       
     }
     
     func databinding() {
