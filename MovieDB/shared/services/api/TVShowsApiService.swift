@@ -8,15 +8,8 @@
 
 import Foundation
 
-class TVShowsApiService: ApiObjectOperations, JSONObjectMapping {
-    typealias Content = TV
-    var networkingClient: NetworkingClient
-    
-    required init(networkingClient: NetworkingClient){
-        self.networkingClient = networkingClient
-    }
-    
-    func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
+class TVShowsApiService: ApiService<TV> {
+    override func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
         var modifiedDictionary = dictionary
         if modifiedDictionary.keys.contains("vote_average") {
             modifiedDictionary["voteAverage"] = dictionary["vote_average"]

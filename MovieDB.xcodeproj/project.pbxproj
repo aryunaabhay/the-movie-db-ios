@@ -15,7 +15,7 @@
 		98CA3A3623039D4600B3B279 /* MoviesApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A3523039D4600B3B279 /* MoviesApiService.swift */; };
 		98CA3A382304BF9600B3B279 /* TVShowsApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A372304BF9600B3B279 /* TVShowsApiService.swift */; };
 		98CA3A3A2304BFBB00B3B279 /* VideoContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A392304BFBB00B3B279 /* VideoContent.swift */; };
-		98CA3A3C2304CC5C00B3B279 /* ApiOperationsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A3B2304CC5C00B3B279 /* ApiOperationsProtocol.swift */; };
+		98CA3A3C2304CC5C00B3B279 /* ApiOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A3B2304CC5C00B3B279 /* ApiOperations.swift */; };
 		98CA3A402304DC6200B3B279 /* ContentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A3F2304DC6200B3B279 /* ContentListViewModel.swift */; };
 		98CA3A432304EBD100B3B279 /* StringUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A422304EBD100B3B279 /* StringUtilities.swift */; };
 		98CA3A452305192600B3B279 /* ContentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A442305192600B3B279 /* ContentListViewController.swift */; };
@@ -72,7 +72,7 @@
 		98CA3A3523039D4600B3B279 /* MoviesApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesApiService.swift; sourceTree = "<group>"; };
 		98CA3A372304BF9600B3B279 /* TVShowsApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsApiService.swift; sourceTree = "<group>"; };
 		98CA3A392304BFBB00B3B279 /* VideoContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContent.swift; sourceTree = "<group>"; };
-		98CA3A3B2304CC5C00B3B279 /* ApiOperationsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiOperationsProtocol.swift; sourceTree = "<group>"; };
+		98CA3A3B2304CC5C00B3B279 /* ApiOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiOperations.swift; sourceTree = "<group>"; };
 		98CA3A3F2304DC6200B3B279 /* ContentListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentListViewModel.swift; sourceTree = "<group>"; };
 		98CA3A422304EBD100B3B279 /* StringUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtilities.swift; sourceTree = "<group>"; };
 		98CA3A442305192600B3B279 /* ContentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewController.swift; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 			children = (
 				98CA3A3523039D4600B3B279 /* MoviesApiService.swift */,
 				98CA3A372304BF9600B3B279 /* TVShowsApiService.swift */,
-				98CA3A3B2304CC5C00B3B279 /* ApiOperationsProtocol.swift */,
+				98CA3A3B2304CC5C00B3B279 /* ApiOperations.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -579,7 +579,7 @@
 				98CA3A492305195900B3B279 /* ContentListRouter.swift in Sources */,
 				98CA3A5A2308AE5F00B3B279 /* VideoContentDetailViewController.swift in Sources */,
 				98CA3A582308ABE200B3B279 /* MainScreenRouter.swift in Sources */,
-				98CA3A3C2304CC5C00B3B279 /* ApiOperationsProtocol.swift in Sources */,
+				98CA3A3C2304CC5C00B3B279 /* ApiOperations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

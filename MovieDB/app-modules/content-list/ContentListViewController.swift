@@ -10,11 +10,12 @@ import UIKit
 import SnapKit
 
 class ContentListViewController: UIViewController, ReactiveDataView {
-    private var viewModel: ContentListViewModel
-    private var tableViewController: ContentListTableController
-    private var containerStackView = UIStackView()
-    private var categoriesSegmentedControl: UISegmentedControl
-    private var loader = UIActivityIndicatorView(style: .gray)
+    private let viewModel: ContentListViewModel
+    private let tableViewController: ContentListTableController
+    private let containerStackView = UIStackView()
+    private let categoriesSegmentedControl: UISegmentedControl
+    private let searchBar = UISearchBar(frame: .zero)
+    private let loader = UIActivityIndicatorView(style: .gray)
     
     init(viewModel: ContentListViewModel){
         self.viewModel = viewModel
@@ -76,7 +77,13 @@ class ContentListViewController: UIViewController, ReactiveDataView {
     }
     
     func configureSearch(){
-        
+        self.searchBar.translatesAutoresizingMaskIntoConstraints = false
+        self.searchBar.delegate = self
+        self.searchBar.barTintColor = Colors.primaryLight
+        self.containerStackView.addArrangedSubview(self.searchBar)
+        self.searchBar.snp.makeConstraints { (make) in
+            make.height.equalTo(50)
+        }
     }
     
     func configureTableView(){
@@ -114,5 +121,22 @@ class ContentListViewController: UIViewController, ReactiveDataView {
     
     func configureData() {
         // request data from vm
+    }
+}
+
+extension ContentListViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.viewModel.searchContent(by: searchText)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
     }
 }

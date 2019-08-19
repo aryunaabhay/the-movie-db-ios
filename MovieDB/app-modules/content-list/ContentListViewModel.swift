@@ -20,6 +20,7 @@ enum ContentListDataState {
 class ContentListViewModel {
     var sortCategory: ContentCategory
     var contentType: ContentType
+    var apiService: ApiServible
     var allObjects: [VideoContent] = []
     var displayObjects: [VideoContent] = []
     var dataState: MutableProperty<ContentListDataState> = MutableProperty(.start)
@@ -30,6 +31,11 @@ class ContentListViewModel {
     init(contentType: ContentType, sortCategory: ContentCategory){
         self.contentType = contentType
         self.sortCategory = sortCategory
+        if self.contentType == .movie {
+            self.apiService = MoviesApiService(networkingClient: AppConfiguration.movieDBNetworkingClient)
+        }else{
+            self.apiService = TVShowsApiService(networkingClient: AppConfiguration.movieDBNetworkingClient)
+        }
     }
     
     func updateSelectedCategory(selectedIndex: Int) {
@@ -49,31 +55,23 @@ class ContentListViewModel {
     
     func retrieveData(){
         self.dataState.value = .loading
-        // TODO: check if we can abstract this more
-        if self.contentType == .movie {
-            let moviesApiService = MoviesApiService(networkingClient: AppConfiguration.movieDBNetworkingClient)
-            moviesApiService.listContent(sortedBy: self.sortCategory).then { [weak self] (movies) in
-                guard let this = self else { return }
-                this.allObjects = movies
-                this.displayObjects = movies
-                this.dataState.value = movies.count > 0 ? .loaded : .noData
-            }.catch { [weak self] (error) in
-                self?.handleError(error)
+        self.apiService.listContent(sortedBy: self.sortCategory).then { [weak self] (objects) in
+            guard let this = self else { return }
+            if let videoContentArray = objects as? [VideoContent] {
+            this.allObjects = videoContentArray
+            this.displayObjects = videoContentArray
+            this.dataState.value = videoContentArray.count > 0 ? .loaded : .noData
             }
-        } else {
-            let showsApiService = TVShowsApiService(networkingClient: AppConfiguration.movieDBNetworkingClient)
-            showsApiService.listContent(sortedBy: self.sortCategory).then { [weak self] (shows) in
-                guard let this = self else { return }
-                this.allObjects = shows
-                this.displayObjects = shows
-                this.dataState.value = shows.count > 0 ? .loaded : .noData
-            }.catch { [weak self] (error) in
-                self?.handleError(error)
-            }
+        }.catch { [weak self] (error) in
+            self?.handleError(error)
         }
     }
     
     func handleError(_ error: Error){
         self.dataState.value = .errorLoading
+    }
+    
+    func searchContent(by text: String) {
+       self.dataState.value = .loading
     }
 }
