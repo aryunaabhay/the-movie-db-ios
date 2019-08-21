@@ -12,6 +12,7 @@ target 'MovieDB' do
   
   target 'MovieDBTests' do
     inherit! :search_paths
+    pod 'OHHTTPStubs/Swift', '8.0.0'
   end
 
   target 'MovieDBUITests' do
