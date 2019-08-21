@@ -42,10 +42,8 @@ class ContentListViewModelTests: XCTestCase {
         }
     }
     
-    func testMoviesListDataLocally(){
-        self.loadMoviesLocally()
-        App.isNetworkReachable = false
-        
+    func testListDataLocally(){
+        self.loadDataLocally()
         let contentListVm = ContentListViewModel(contentType: .movie, sortCategory: .popular)
         let moviesDataExpectation = expectation(description: "movies list offline")
         contentListVm.retrieveData({
@@ -57,15 +55,14 @@ class ContentListViewModelTests: XCTestCase {
     }
     
     func testSearchOnline(){
-        self.loadMoviesLocally()
         stub(condition: isHost(self.domain) && isPath("/" + App.apiVersion + "/search/movie")) { _ in
             let stubPath = OHPathForFile("movies.json", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
+            return fixture(filePath: stubPath!, headers: ["Content-Type": "application/json"])
         }
         let contentListVm = ContentListViewModel(contentType: .movie, sortCategory: .popular)
-        
         let moviesDataExpectation = expectation(description: "movies search results online")
-        contentListVm.searchContent(by: "Toy S", completion: {
+        
+        contentListVm.searchContent(by: "Avengers", completion: {
             moviesDataExpectation.fulfill()
         })
         self.waitForExpectations(timeout: 1) { error in
@@ -74,7 +71,7 @@ class ContentListViewModelTests: XCTestCase {
     }
     
     func testSearchOffline(){
-        self.loadMoviesLocally()
+        self.loadDataLocally()
         let contentListVm = ContentListViewModel(contentType: .movie, sortCategory: .popular)
         let moviesDataExpectation = expectation(description: "movies search results offline")
         contentListVm.searchContent(by: "Toy S", completion: {
@@ -85,7 +82,8 @@ class ContentListViewModelTests: XCTestCase {
         }
     }
     
-    func loadMoviesLocally(){
+    func loadDataLocally(){
+        App.isNetworkReachable = false
         let realm = try! Realm()
         realm.beginWrite()
         realm.create(Movie.self, value: ["id": 12, "title": "Toy story 4", "voteAverage": 7.2, "popularity": 237])

@@ -8,7 +8,7 @@
 
 struct App {
     static let movieDBNetworkingClient = NetworkingClient(baseUrl: App.baseApiUrlString + App.apiVersion + "/", apiKey: App.apiKey)
-    static var isNetworkReachable = false
+    static var isNetworkReachable = true
     
     static let baseApiUrlString = "https://api.themoviedb.org/"
     static let apiVersion = "3"

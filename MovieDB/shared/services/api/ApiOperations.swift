@@ -37,12 +37,11 @@ class ApiService<T: Object>: ApiServible {
         if online {
             let querySegmentType = self.querySegment.lowercased()
             let endpoint = "\(querySegmentType)/\(category.rawValue)"
-            let promise = self.networkingClient.request(verb: .get, endpoint: endpoint, parameters: [:])
+            return self.networkingClient.request(verb: .get, endpoint: endpoint, parameters: [:])
             .then { (json) -> Promise<[Object]> in
                 let mappedContent = self.mapping(jsonResponse: json)
                 return Promise(mappedContent)
             }
-            return promise
         } else {
             let realm = try! Realm()
             let filteredContent = realm.objects(T.self).sorted(byKeyPath: category.associatedKeyPath, ascending: false)
@@ -55,12 +54,11 @@ class ApiService<T: Object>: ApiServible {
             let querySegmentType = self.querySegment.lowercased()
             let endpoint = "search/\(querySegmentType)"
             let params = ["query": queryTxt]
-            let promise = self.networkingClient.request(verb: .get, endpoint: endpoint, parameters: params)
-            .then { (json) -> Promise<[Object]> in
-                 _ = self.mapping(jsonResponse: json)
-                return self.search(queryTxt: queryTxt, category: category, online: false)
+            return self.networkingClient.request(verb: .get, endpoint: endpoint, parameters: params)
+            .then { [weak self] (json) -> Promise<[Object]> in
+                let mapped = self?.mapping(jsonResponse: json) ?? []
+                return Promise(mapped)
             }
-            return promise
         } else {
             let realm = try! Realm()
             let predicate = NSPredicate(format: "title CONTAINS[c] %@", queryTxt.lowercased())

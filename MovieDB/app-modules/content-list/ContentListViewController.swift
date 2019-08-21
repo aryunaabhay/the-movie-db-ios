@@ -86,6 +86,7 @@ class ContentListViewController: UIViewController, ReactiveDataView {
         self.searchBar.tintColor = Colors.primaryDark
         self.containerStackView.addArrangedSubview(self.searchBar)
         self.searchBar.placeholder = "Search"
+        self.searchBar.returnKeyType = .done
         self.searchBar.snp.makeConstraints { (make) in
             make.height.equalTo(50)
         }
@@ -156,9 +157,17 @@ extension ContentListViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-        searchBar.text = ""
-        searchBar.resignFirstResponder()
+        self.cancelSearch()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.cancelSearch()
+    }
+    
+    func cancelSearch(){
+        self.searchBar.showsCancelButton = false
+        self.searchBar.text = ""
+        self.searchBar.resignFirstResponder()
         self.viewModel.resetSearch()
     }
 }

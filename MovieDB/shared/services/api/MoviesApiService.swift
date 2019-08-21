@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Promises
+import RealmSwift
 
 class MoviesApiService: ApiService<Movie> {
 
@@ -24,5 +26,26 @@ class MoviesApiService: ApiService<Movie> {
         }
         
         return modifiedDictionary
+    }
+    
+    override func search(queryTxt: String, category: ContentCategory, online: Bool) -> Promise<[Object]> {
+        return super.search(queryTxt: queryTxt, category: category, online: online)
+        .then({ (objects) -> Promise<[Object]> in
+            let sorted = (objects as? [Movie])?.sorted(by: { (left, right) -> Bool in
+                switch category {
+                case .popular:
+                    return left.popularity > right.popularity
+                case .topRated:
+                    return left.voteAverage > right.voteAverage
+                case .upcoming:
+                    if let leftReleaseDate = left.releaseDate, let rightReleaseDate = right.releaseDate {
+                        return leftReleaseDate > rightReleaseDate
+                    }else{
+                        return true
+                    }
+                }
+            }) ?? []
+            return Promise(sorted)
+        })
     }
 }
