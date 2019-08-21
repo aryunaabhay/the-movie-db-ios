@@ -32,9 +32,9 @@ class ContentListViewModel {
         self.contentType = contentType
         self.sortCategory = sortCategory
         if self.contentType == .movie {
-            self.apiService = MoviesApiService(networkingClient: AppConfiguration.movieDBNetworkingClient)
+            self.apiService = MoviesApiService(networkingClient: App.movieDBNetworkingClient)
         }else{
-            self.apiService = TVShowsApiService(networkingClient: AppConfiguration.movieDBNetworkingClient)
+            self.apiService = TVShowsApiService(networkingClient: App.movieDBNetworkingClient)
         }
     }
     
@@ -53,16 +53,18 @@ class ContentListViewModel {
         self.retrieveData()
     }
     
-    func retrieveData(){
+    func retrieveData(_ completion: (() -> ())? = nil){
         self.dataState.value = .loading
-        self.apiService.listContent(sortedBy: self.sortCategory, online: AppConfiguration.isNetworkReachable).then { [weak self] (objects) in
+        self.apiService.listContent(sortedBy: self.sortCategory, online: App.isNetworkReachable).then { [weak self] (objects) in
             guard let this = self else { return }
             let videoContentArray = objects as? [VideoContent] ?? []
             this.allObjects = videoContentArray
             this.displayObjects = videoContentArray
             this.dataState.value = videoContentArray.count > 0 ? .loaded : .noData
+            completion?()
         }.catch { [weak self] (error) in
             self?.handleError(error)
+            completion?()
         }
     }
     
@@ -70,15 +72,18 @@ class ContentListViewModel {
         self.dataState.value = .errorLoading
     }
     
-    func searchContent(by text: String) {
+    func searchContent(by text: String, completion: (() -> ())? = nil) {
         if text.count < 4 { return }
         self.dataState.value = .loading
-        let localObjects = AppConfiguration.isNetworkReachable ? nil : self.allObjects
-        self.apiService.search(queryTxt: text, objects: localObjects).then { [weak self](results) in
+        self.apiService.search(queryTxt: text, category: self.sortCategory, online: App.isNetworkReachable).then { [weak self](results) in
             guard let this = self else { return }
             let objectResults = results as? [VideoContent] ?? []
             this.displayObjects = objectResults
             this.dataState.value = objectResults.count > 0 ? .loaded : .noData
+            completion?()
+        }.catch { [weak self] (error) in
+            self?.handleError(error)
+            completion?()
         }
     }
     

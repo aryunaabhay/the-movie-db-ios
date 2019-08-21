@@ -59,7 +59,7 @@ extension ContentListTableController {
         cell.titleLabel.text = videoContent.title
         cell.voteAvgLabel.text = String(videoContent.voteAverage)
         cell.popularityLabel.text = String(videoContent.popularity)
-        cell.configureImage(urlString: AppConfiguration.baseImagesUrlString + "w92/" + videoContent.posterPath)
+        cell.configureImage(urlString: App.baseImagesUrlString + "w92/" + videoContent.posterPath)
         cell.selectionStyle = .none
         return cell
     }

@@ -11,7 +11,7 @@ import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    let connectionObserver = NetworkConnectionObserver()
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setup(){
-        NetworkConnectionObserver().startListening { (reachable) in
-            AppConfiguration.isNetworkReachable = reachable
+        self.connectionObserver.startListening { (reachable) in
+            App.isNetworkReachable = reachable
         }
         self.window?.rootViewController = MainScreenRouter.mainScreen()
         Appearance.defaultNavigationAppearance()

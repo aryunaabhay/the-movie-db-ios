@@ -33,11 +33,12 @@
 		98CA3A67230A1D7700B3B279 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A66230A1D7700B3B279 /* Colors.swift */; };
 		98CA3A69230B03A700B3B279 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A68230B03A700B3B279 /* Fonts.swift */; };
 		98CA3A6B230B225D00B3B279 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A6A230B225D00B3B279 /* Appearance.swift */; };
+		98CA3A70230C4D9D00B3B279 /* ContentListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A6F230C4D9D00B3B279 /* ContentListViewModelTests.swift */; };
+		98CA3A72230C56B800B3B279 /* movies.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CA3A71230C56B800B3B279 /* movies.json */; };
 		98ECF3632302F35F005FC3DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ECF3622302F35F005FC3DA /* AppDelegate.swift */; };
 		98ECF3682302F35F005FC3DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF3662302F35F005FC3DA /* Main.storyboard */; };
 		98ECF36A2302F360005FC3DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF3692302F360005FC3DA /* Assets.xcassets */; };
 		98ECF36D2302F360005FC3DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98ECF36B2302F360005FC3DA /* LaunchScreen.storyboard */; };
-		98ECF3782302F361005FC3DA /* MovieDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ECF3772302F361005FC3DA /* MovieDBTests.swift */; };
 		98ECF3832302F361005FC3DA /* MovieDBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98ECF3822302F361005FC3DA /* MovieDBUITests.swift */; };
 		A9E249DCE9F793AF85FB655D /* Pods_MovieDBUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC707E79120CBBC94EE2897 /* Pods_MovieDBUITests.framework */; };
 		E5E71339DC20867A94574D6C /* Pods_MovieDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A35D4CFB51CD7B5377D1BA /* Pods_MovieDB.framework */; };
@@ -92,6 +93,8 @@
 		98CA3A66230A1D7700B3B279 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		98CA3A68230B03A700B3B279 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		98CA3A6A230B225D00B3B279 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		98CA3A6F230C4D9D00B3B279 /* ContentListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewModelTests.swift; sourceTree = "<group>"; };
+		98CA3A71230C56B800B3B279 /* movies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movies.json; sourceTree = "<group>"; };
 		98ECF35F2302F35F005FC3DA /* MovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ECF3622302F35F005FC3DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98ECF3672302F35F005FC3DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,7 +102,6 @@
 		98ECF36C2302F360005FC3DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		98ECF36E2302F360005FC3DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98ECF3732302F361005FC3DA /* MovieDBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		98ECF3772302F361005FC3DA /* MovieDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBTests.swift; sourceTree = "<group>"; };
 		98ECF3792302F361005FC3DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98ECF37E2302F361005FC3DA /* MovieDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		98ECF3822302F361005FC3DA /* MovieDBUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBUITests.swift; sourceTree = "<group>"; };
@@ -326,8 +328,9 @@
 		98ECF3762302F361005FC3DA /* MovieDBTests */ = {
 			isa = PBXGroup;
 			children = (
-				98ECF3772302F361005FC3DA /* MovieDBTests.swift */,
+				98CA3A71230C56B800B3B279 /* movies.json */,
 				98ECF3792302F361005FC3DA /* Info.plist */,
+				98CA3A6F230C4D9D00B3B279 /* ContentListViewModelTests.swift */,
 			);
 			path = MovieDBTests;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				98ECF36F2302F361005FC3DA /* Sources */,
 				98ECF3702302F361005FC3DA /* Frameworks */,
 				98ECF3712302F361005FC3DA /* Resources */,
+				8CDFEB030735665C5432CE0B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -416,6 +420,7 @@
 					};
 					98ECF3722302F361005FC3DA = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
 						TestTargetID = 98ECF35E2302F35F005FC3DA;
 					};
 					98ECF37D2302F361005FC3DA = {
@@ -461,6 +466,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98CA3A72230C56B800B3B279 /* movies.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +522,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8CDFEB030735665C5432CE0B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieDBTests/Pods-MovieDBTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieDBTests/Pods-MovieDBTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MovieDBTests/Pods-MovieDBTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CA29293877D0511D19F495BD /* [CP] Check Pods Manifest.lock */ = {
@@ -595,7 +618,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98ECF3782302F361005FC3DA /* MovieDBTests.swift in Sources */,
+				98CA3A70230C4D9D00B3B279 /* ContentListViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,6 +789,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B35ZTZAERS;
 				INFOPLIST_FILE = MovieDB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -785,6 +809,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B35ZTZAERS;
 				INFOPLIST_FILE = MovieDB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -802,7 +827,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B35ZTZAERS;
 				INFOPLIST_FILE = MovieDBTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -811,6 +838,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = testco.MovieDBTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieDB.app/MovieDB";
@@ -823,7 +851,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B35ZTZAERS;
 				INFOPLIST_FILE = MovieDBTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -844,6 +874,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B35ZTZAERS;
 				INFOPLIST_FILE = MovieDBUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -864,6 +895,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B35ZTZAERS;
 				INFOPLIST_FILE = MovieDBUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

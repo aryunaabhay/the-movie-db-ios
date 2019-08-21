@@ -15,7 +15,7 @@ protocol ApiObjectOperations: class {
     var querySegment: String { get }
     var networkingClient: NetworkingClient { get set }
     func listContent(sortedBy category: ContentCategory, online: Bool) -> Promise<[Object]>
-    func search(queryTxt: String, objects: [Object]?) -> Promise<[Object]>
+    func search(queryTxt: String, category: ContentCategory, online: Bool) -> Promise<[Object]>
 }
 
 protocol JSONObjectMapping {
@@ -41,8 +41,6 @@ class ApiService<T: Object>: ApiServible {
             .then { (json) -> Promise<[Object]> in
                 let mappedContent = self.mapping(jsonResponse: json)
                 return Promise(mappedContent)
-            }.catch { (error) in
-                return Promise(error)
             }
             return promise
         } else {
@@ -52,23 +50,22 @@ class ApiService<T: Object>: ApiServible {
         }
     }
     
-    func search(queryTxt: String, objects: [Object]?) -> Promise<[Object]> {
-        if let localObjects = objects {
-            //improve this to make more abstract and apply for more objects with an interface
-            let filtered = (localObjects as? [VideoContent])?.filter({ $0.title.contains(queryTxt) }) ?? []
-            return Promise(filtered)
-        } else {
+    func search(queryTxt: String, category: ContentCategory, online: Bool) -> Promise<[Object]> {
+        if online {
             let querySegmentType = self.querySegment.lowercased()
             let endpoint = "search/\(querySegmentType)"
             let params = ["query": queryTxt]
             let promise = self.networkingClient.request(verb: .get, endpoint: endpoint, parameters: params)
             .then { (json) -> Promise<[Object]> in
-                let mappedContent = self.mapping(jsonResponse: json)
-                return Promise(mappedContent)
-            }.catch { (error) in
-                return Promise(error)
+                 _ = self.mapping(jsonResponse: json)
+                return self.search(queryTxt: queryTxt, category: category, online: false)
             }
             return promise
+        } else {
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "title CONTAINS[c] %@", queryTxt.lowercased())
+            let filtered = realm.objects(T.self).filter(predicate).sorted(byKeyPath: category.associatedKeyPath, ascending: false)
+            return Promise(Array(filtered))
         }
     }
     

@@ -10,10 +10,10 @@ import Foundation
 import Alamofire
 
 class NetworkConnectionObserver {
-
+    let manager = NetworkReachabilityManager(host: "www.apple.com")
+    
     func startListening(completion: @escaping (Bool) -> ()){
-        let reachabilityManager = NetworkReachabilityManager()
-        reachabilityManager?.listener = { status in
+        self.manager?.listener = { status in
             switch status {
             case .notReachable:
                 completion(false)
@@ -21,7 +21,7 @@ class NetworkConnectionObserver {
                 completion(true)
             }
         }
-        reachabilityManager?.startListening()
+        self.manager?.startListening()
     }
 }
 

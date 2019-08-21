@@ -101,7 +101,7 @@ class VideoContentDetailViewController: UIViewController, ReactiveDataView {
         containerImageView.snp.makeConstraints { (make) in
             make.height.equalTo(450)
         }
-        if let url = URL(string: AppConfiguration.baseImagesUrlString + "w500/" + self.viewModel.videoContent.posterPath){
+        if let url = URL(string: App.baseImagesUrlString + "w500/" + self.viewModel.videoContent.posterPath){
             self.posterImageView.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.6))])
         }
     }

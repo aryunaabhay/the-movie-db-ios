@@ -83,6 +83,7 @@ class ContentListViewController: UIViewController, ReactiveDataView {
         self.searchBar.translatesAutoresizingMaskIntoConstraints = false
         self.searchBar.delegate = self
         self.searchBar.barTintColor = Colors.primaryLight
+        self.searchBar.tintColor = Colors.primaryDark
         self.containerStackView.addArrangedSubview(self.searchBar)
         self.searchBar.placeholder = "Search"
         self.searchBar.snp.makeConstraints { (make) in
@@ -119,7 +120,9 @@ class ContentListViewController: UIViewController, ReactiveDataView {
                 this.loader.isHidden = true
                 this.tableViewController.tableView.isHidden = false
                 this.tableViewController.tableView.reloadData()
-                this.tableViewController.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                if this.viewModel.displayObjects.count > 0 {
+                    this.tableViewController.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                }
             case .loading:
                 this.loader.isHidden = false
                 this.tableViewController.tableView.isHidden = true
@@ -134,7 +137,8 @@ class ContentListViewController: UIViewController, ReactiveDataView {
             }
         }
         
-        self.searchBar.reactive.continuousTextValues.take(duringLifetimeOf: self).throttle(0.5, on: QueueScheduler.main).observeValues { [weak self](text) in
+        self.searchBar.reactive.continuousTextValues.take(duringLifetimeOf: self).throttle(0.8
+            , on: QueueScheduler.main).observeValues { [weak self](text) in
             guard let this = self, let searchText = text else { return }
             this.viewModel.searchContent(by: searchText)
         }
