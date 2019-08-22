@@ -6,7 +6,7 @@ Test app using the movieDB api
 
 This app uses for its view components a modification of the MVVM design pattern that borrows the routers from the viper architecture and in terms of file structure the most significant trait is that it makes a strong distinction of code that is  directly a view component(screen or subviews) of the app or common logic exposed for use across the app or even logic that could be moved to a external library this is achieved by having the app_modules and the shared directories respectively.  
 
-app layers and the overall class correspondence:
+**App layers and the overall class correspondence**:
 
 **Presentation**: views, viewcontrollers and logic around configuring the appearance of the app.  
 **Business/Domain**: this layer is mainly formed by viewmodels, entities and other related logic with the use case in this domain.  
