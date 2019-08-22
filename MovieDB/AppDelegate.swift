@@ -20,11 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setup(){
-        self.connectionObserver.startListening { (reachable) in
-            App.isNetworkReachable = reachable
-        }
-        self.window?.rootViewController = MainScreenRouter.mainScreen()
         Appearance.defaultNavigationAppearance()
+        self.connectionObserver.startListening { [weak self](reachable) in
+            App.isNetworkReachable = reachable
+            self?.window?.rootViewController = MainScreenRouter.mainScreen()
+        }
     }
 }
 
