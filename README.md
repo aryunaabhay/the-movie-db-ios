@@ -10,7 +10,7 @@ This app uses for its view components a modification of the MVVM design pattern 
 
 **Presentation**: views, viewcontrollers and logic around configuring the appearance of the app.  
 **Business/Domain**: this layer is mainly formed by viewmodels, entities and other related logic with the use case in this domain.  
-**Data Access**: Api services and Networking with alamofire. 
+**Data Access**: Api services and Networking with alamofire.  
 **Database/Persistance**: here Realm is the mechanism of persistance and the database itself.
 
 ### Overview of classes responsibilities:
