@@ -9,4 +9,4 @@
 import UIKit
 import RealmSwift
 
-class TV: VideoContent { }
+class TVShow: VideoContent { }

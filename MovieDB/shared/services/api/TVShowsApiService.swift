@@ -10,7 +10,7 @@ import Foundation
 import Promises
 import RealmSwift
 
-class TVShowsApiService: ApiService<TV> {
+class TVShowsApiService: ApiService<TVShow> {
     override func transformKeysForMapping(dictionary: [String: Any]) -> [String: Any] {
         var modifiedDictionary = dictionary
         if modifiedDictionary.keys.contains("vote_average") {
@@ -24,7 +24,7 @@ class TVShowsApiService: ApiService<TV> {
     override func search(queryTxt: String, category: ContentCategory, online: Bool) -> Promise<[Object]> {
         return super.search(queryTxt: queryTxt, category: category, online: online)
             .then({ (objects) -> Promise<[Object]> in
-                let sorted = (objects as? [Movie])?.sorted(by: { (left, right) -> Bool in
+                let sorted = (objects as? [TVShow])?.sorted(by: { (left, right) -> Bool in
                     switch category {
                     case .popular:
                         return left.popularity > right.popularity

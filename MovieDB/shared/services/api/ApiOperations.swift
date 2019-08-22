@@ -26,7 +26,10 @@ protocol JSONObjectMapping {
 protocol ApiServible: ApiObjectOperations, JSONObjectMapping { }
 
 class ApiService<T: Object>: ApiServible {
-    var querySegment: String { return String(describing: T.self).lowercased() }
+    var querySegment: String {
+        let className = String(describing: T.self).lowercased()
+        return className == "tvshow" ? "tv" : className
+    }
     var networkingClient: NetworkingClient
     
     required init(networkingClient: NetworkingClient){
