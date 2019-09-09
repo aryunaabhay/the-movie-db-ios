@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import ReactiveCocoa
 
-class ContentListTableController: UITableViewController, ReactiveDataView {
-    var viewModel: ContentListViewModel
+class ContentListTableController: UITableViewController {
+    var viewModel: ContentListViewModelProtocol
     
-    required init(viewModel: ContentListViewModel){
+    required init(viewModel: ContentListViewModelProtocol){
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -23,7 +22,7 @@ class ContentListTableController: UITableViewController, ReactiveDataView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configure()
+        self.configureSubviews()
     }
     
     func configureSubviews(){
@@ -31,14 +30,6 @@ class ContentListTableController: UITableViewController, ReactiveDataView {
         let cellIdentifier = VideoContentListCell.cellIdentifier
         let cellNib = UINib(nibName: cellIdentifier, bundle: nil)
         self.tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
-    }
-    
-    func databinding(){
-        
-    }
-    
-    func configureData(){
-        self.viewModel.retrieveData()
     }
 }
 

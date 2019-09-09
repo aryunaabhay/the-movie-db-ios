@@ -12,7 +12,7 @@ import UIKit
 class ContentListRouter {
     
     static func contentListScreen(contentType: ContentType) -> UIViewController {
-        let viewModel = ContentListViewModel(contentType: contentType, sortCategory: .popular)
-        return ContentListViewController(viewModel: viewModel)
+        let interactor = ContentListInteractor(contentType: contentType, sortCategory: .popular)
+        return ContentListViewController(interactor: interactor)
     }
 }

@@ -12,11 +12,13 @@
 		9825B2E8230379C7008C9EC9 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825B2E7230379C7008C9EC9 /* AppConfiguration.swift */; };
 		9825B2EA23037B94008C9EC9 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825B2E923037B94008C9EC9 /* Movie.swift */; };
 		9825B2EC23037BE7008C9EC9 /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9825B2EB23037BE7008C9EC9 /* TVShow.swift */; };
+		98463497232600F500750757 /* ContentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98463496232600F500750757 /* ContentListViewModel.swift */; };
+		98A73D2A232301C700455EA5 /* ContentListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A73D29232301C700455EA5 /* ContentListInteractor.swift */; };
 		98CA3A3623039D4600B3B279 /* MoviesApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A3523039D4600B3B279 /* MoviesApiService.swift */; };
 		98CA3A382304BF9600B3B279 /* TVShowsApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A372304BF9600B3B279 /* TVShowsApiService.swift */; };
 		98CA3A3A2304BFBB00B3B279 /* VideoContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A392304BFBB00B3B279 /* VideoContent.swift */; };
 		98CA3A3C2304CC5C00B3B279 /* ApiOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A3B2304CC5C00B3B279 /* ApiOperations.swift */; };
-		98CA3A402304DC6200B3B279 /* ContentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A3F2304DC6200B3B279 /* ContentListViewModel.swift */; };
+		98CA3A402304DC6200B3B279 /* ContentListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A3F2304DC6200B3B279 /* ContentListPresenter.swift */; };
 		98CA3A432304EBD100B3B279 /* StringUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A422304EBD100B3B279 /* StringUtilities.swift */; };
 		98CA3A452305192600B3B279 /* ContentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A442305192600B3B279 /* ContentListViewController.swift */; };
 		98CA3A472305193F00B3B279 /* ContentListTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA3A462305193F00B3B279 /* ContentListTableController.swift */; };
@@ -63,11 +65,13 @@
 		9825B2E7230379C7008C9EC9 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		9825B2E923037B94008C9EC9 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		9825B2EB23037BE7008C9EC9 /* TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
+		98463496232600F500750757 /* ContentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewModel.swift; sourceTree = "<group>"; };
+		98A73D29232301C700455EA5 /* ContentListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListInteractor.swift; sourceTree = "<group>"; };
 		98CA3A3523039D4600B3B279 /* MoviesApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesApiService.swift; sourceTree = "<group>"; };
 		98CA3A372304BF9600B3B279 /* TVShowsApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsApiService.swift; sourceTree = "<group>"; };
 		98CA3A392304BFBB00B3B279 /* VideoContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContent.swift; sourceTree = "<group>"; };
 		98CA3A3B2304CC5C00B3B279 /* ApiOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiOperations.swift; sourceTree = "<group>"; };
-		98CA3A3F2304DC6200B3B279 /* ContentListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentListViewModel.swift; sourceTree = "<group>"; };
+		98CA3A3F2304DC6200B3B279 /* ContentListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentListPresenter.swift; sourceTree = "<group>"; };
 		98CA3A422304EBD100B3B279 /* StringUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtilities.swift; sourceTree = "<group>"; };
 		98CA3A442305192600B3B279 /* ContentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListViewController.swift; sourceTree = "<group>"; };
 		98CA3A462305193F00B3B279 /* ContentListTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListTableController.swift; sourceTree = "<group>"; };
@@ -164,10 +168,12 @@
 			isa = PBXGroup;
 			children = (
 				98CA3A4F23075BFE00B3B279 /* cells */,
-				98CA3A3F2304DC6200B3B279 /* ContentListViewModel.swift */,
+				98CA3A3F2304DC6200B3B279 /* ContentListPresenter.swift */,
 				98CA3A442305192600B3B279 /* ContentListViewController.swift */,
 				98CA3A462305193F00B3B279 /* ContentListTableController.swift */,
 				98CA3A482305195900B3B279 /* ContentListRouter.swift */,
+				98A73D29232301C700455EA5 /* ContentListInteractor.swift */,
+				98463496232600F500750757 /* ContentListViewModel.swift */,
 			);
 			path = "content-list";
 			sourceTree = "<group>";
@@ -507,6 +513,8 @@
 				98CA3A67230A1D7700B3B279 /* Colors.swift in Sources */,
 				9825B2EC23037BE7008C9EC9 /* TVShow.swift in Sources */,
 				98CA3A5E2308AFE100B3B279 /* VideoContentDetailRouter.swift in Sources */,
+				98463497232600F500750757 /* ContentListViewModel.swift in Sources */,
+				98A73D2A232301C700455EA5 /* ContentListInteractor.swift in Sources */,
 				98CA3A6023099DCA00B3B279 /* NetworkConnectionManager.swift in Sources */,
 				9825B2E8230379C7008C9EC9 /* AppConfiguration.swift in Sources */,
 				98CA3A5323075C8000B3B279 /* VideoContentListCell.swift in Sources */,
@@ -519,7 +527,7 @@
 				98ECF3632302F35F005FC3DA /* AppDelegate.swift in Sources */,
 				98CA3A452305192600B3B279 /* ContentListViewController.swift in Sources */,
 				9825B2E323036BA5008C9EC9 /* Networking.swift in Sources */,
-				98CA3A402304DC6200B3B279 /* ContentListViewModel.swift in Sources */,
+				98CA3A402304DC6200B3B279 /* ContentListPresenter.swift in Sources */,
 				98CA3A472305193F00B3B279 /* ContentListTableController.swift in Sources */,
 				98CA3A5C2308AEC700B3B279 /* VideoContentDetailViewModel.swift in Sources */,
 				98CA3A6B230B225D00B3B279 /* Appearance.swift in Sources */,

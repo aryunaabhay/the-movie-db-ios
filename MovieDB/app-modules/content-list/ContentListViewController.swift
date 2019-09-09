@@ -11,8 +11,14 @@ import SnapKit
 import ReactiveSwift
 import ReactiveCocoa
 
-class ContentListViewController: UIViewController, ReactiveDataView {
-    private let viewModel: ContentListViewModel
+protocol ContentListDisplayProtocol {
+    var viewModel: ContentListViewModelProtocol { get set }
+    func updateViewModel(vm: ContentListViewModelProtocol)
+}
+
+class ContentListViewController: UIViewController, ContentListDisplayProtocol {
+    var viewModel: ContentListViewModelProtocol
+    private var interactor: ContentListBusinessLogic
     private let tableViewController: ContentListTableController
     private let containerStackView = UIStackView()
     private let categoriesSegmentedControl: UISegmentedControl
@@ -20,11 +26,13 @@ class ContentListViewController: UIViewController, ReactiveDataView {
     private let loader = UIActivityIndicatorView(style: .gray)
     private let noDataLabel = UILabel(frame: .zero)
     
-    init(viewModel: ContentListViewModel){
-        self.viewModel = viewModel
-        self.tableViewController = ContentListTableController(viewModel: viewModel)
-        self.categoriesSegmentedControl = UISegmentedControl(items: viewModel.segmentCategories)
+    init(interactor: ContentListBusinessLogic){
+        self.interactor = interactor
+        self.viewModel = ContentListViewModel()
+        self.tableViewController = ContentListTableController(viewModel: self.viewModel)
+        self.categoriesSegmentedControl = UISegmentedControl(items: interactor.segmentCategories)
         super.init(nibName: nil, bundle: nil)
+        self.interactor.presenter = ContentListPresenter(vc: self)
         self.addChild(self.tableViewController)
     }
     
@@ -34,7 +42,10 @@ class ContentListViewController: UIViewController, ReactiveDataView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configure()
+        self.configureSubviews()
+        self.databinding()
+        //initial loading
+        self.interactor.changeSelectedCategory(self.interactor.sortCategory)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +55,7 @@ class ContentListViewController: UIViewController, ReactiveDataView {
     
     func configureSubviews(){
         self.navigationController?.navigationBar.isTranslucent = false
-        self.title = self.viewModel.contentType == .movie ? "Movies" : "TV Shows"
+        self.title = self.interactor.contentType == .movie ? "Movies" : "TV Shows"
         self.view.backgroundColor = UIColor.white
         self.configureContainerStack()
         self.configureSegmentedControl()
@@ -107,46 +118,47 @@ class ContentListViewController: UIViewController, ReactiveDataView {
     func databinding() {
         self.categoriesSegmentedControl.reactive.controlEvents(.valueChanged).signal.observeValues { [weak self](segment) in
             guard let this = self else { return }
-            this.viewModel.updateSelectedCategory(selectedIndex: segment.selectedSegmentIndex)
-            this.searchBarCancelButtonClicked(this.searchBar)
-        }
-        
-        self.viewModel.dataState.producer.take(duringLifetimeOf: self).startWithValues { [weak self](state) in
-            guard let this = self else { return }
-            switch state {
-            case .start:
-                print("start")
-            case .loaded:
-                this.loader.stopAnimating()
-                this.loader.isHidden = true
-                this.tableViewController.tableView.isHidden = false
-                this.tableViewController.tableView.reloadData()
-                if this.viewModel.displayObjects.count > 0 {
-                    this.tableViewController.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-                }
-            case .loading:
-                this.loader.isHidden = false
-                this.tableViewController.tableView.isHidden = true
-                this.loader.startAnimating()
-            case .noData:
-                this.loader.isHidden = true
-                this.tableViewController.tableView.isHidden = true
-                this.noDataLabel.text = "Not found"
-                this.noDataLabel.isHidden = false
-            case .errorLoading:
-                print("errorloading")
+            if let selectedCategory = this.interactor.selectedCategory(selectedIndex: segment.selectedSegmentIndex) {
+                this.interactor.changeSelectedCategory(selectedCategory)
+                this.searchBarCancelButtonClicked(this.searchBar)
             }
         }
         
         self.searchBar.reactive.continuousTextValues.take(duringLifetimeOf: self).throttle(0.8
             , on: QueueScheduler.main).observeValues { [weak self](text) in
             guard let this = self, let searchText = text else { return }
-            this.viewModel.searchContent(by: searchText)
+            this.interactor.searchContent(by: searchText, completion: nil)
         }
     }
     
-    func configureData() {
-        // request data from vm
+    func updateViewModel(vm: ContentListViewModelProtocol){
+        // update vm
+        self.viewModel = vm
+        self.tableViewController.viewModel = vm
+        
+        switch self.viewModel.dataState {
+        case .start:
+            print("start")
+        case .loaded:
+            self.loader.stopAnimating()
+            self.loader.isHidden = true
+            self.tableViewController.tableView.isHidden = false
+            self.tableViewController.tableView.reloadData()
+            if self.viewModel.displayObjects.count > 0 {
+                self.tableViewController.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+            }
+        case .loading:
+            self.loader.isHidden = false
+            self.tableViewController.tableView.isHidden = true
+            self.loader.startAnimating()
+        case .noData:
+            self.loader.isHidden = true
+            self.tableViewController.tableView.isHidden = true
+            self.noDataLabel.text = "Not found"
+            self.noDataLabel.isHidden = false
+        case .errorLoading:
+            print("errorloading")
+        }
     }
 }
 
@@ -168,6 +180,6 @@ extension ContentListViewController: UISearchBarDelegate {
         self.searchBar.showsCancelButton = false
         self.searchBar.text = ""
         self.searchBar.resignFirstResponder()
-        self.viewModel.resetSearch()
+        self.interactor.resetSearch()
     }
 }
